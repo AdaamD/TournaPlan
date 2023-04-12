@@ -1,0 +1,131 @@
+header {
+    display: flex;
+    align-items: center;
+}
+img {
+    float: left;
+}
+#titleHeader {
+    margin-left: 20px;
+}
+input,label{
+    margin-bottom: 25px;
+}
+div{
+    margin-top: 50px;;
+}
+#nom,#prenom,#email{
+    width: 20%;
+}
+#pNiveau{
+margin-bottom: 0%;
+}
+#nbTotale,#nbEquipe{
+    align-items: center;
+    width: 5%;
+}
+#AffichageESupJ{
+    display: none;
+    color: red;
+}
+input[type=range]{
+    margin-top: -20px;
+}
+#form1,#form2,#form3 {
+    display: none;
+}
+.btn-info {
+    display: none;
+    color: white;
+    border: none;
+    border-radius: 30%;
+    width: 2%;
+    height: 10%;
+    cursor: pointer;
+}
+  
+.btn-info i {
+    font-size: 18px;
+    margin-left: -1px;
+}
+#listeNbEquipe{
+    width: 3cm;
+    margin-bottom: 1cm;
+}
+#listeJoueurs{
+    background-color: rgb(206, 219, 200);
+}
+#tableauEquipes{
+    display:-webkit-inline-box;
+}
+table{
+    display:block;
+    width: 4cm;
+    padding: 0px;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: rgb(216, 236, 245);
+    height: auto;
+}
+tr{
+     display: grid;
+    border-top: 1px solid black;
+}
+td{
+    text-align: center;
+}
+th{
+    text-align: center;
+    padding-right: 1px;
+    width: inherit;
+    padding-bottom: 13px;
+    border-bottom: 2px solid azure;
+    border-top: 2px solid azure;
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+    20%, 40%, 60%, 80% { transform: translateX(8px); }
+    100% { transform: translateX(0); }
+  }
+  
+.shake {
+    animation-name: shake;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+}
+
+.enable {
+    animation-name: shake;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: 1;
+}
+  
+.slide-right {
+    animation-name: slideRight;
+    animation-duration: 1s;
+}
+  
+@keyframes slideRight {
+    from {
+      transform: translateX(100%); 
+    }
+    to {
+      transform: translateX(0%);
+    }
+}
+#Boutton-Afficher {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border-color: aqua;
+    border-radius: 2%;
+}
