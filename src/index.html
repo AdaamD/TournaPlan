@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html> 
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Formulaire inscription</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header> 
+    <a href="index.html"><img src="img/mur32.png" alt="icone tournoi" width="" height=""></a>
+    <p id="titleHeader">TournaPlan</p>  
+    </header>
+
+    <div>
+        <button id="BouttonManuel">Partie manuelle</button>
+        <button id="BouttonAuto">Partie auto</button>
+    </div>
+
+    <div>
+        <form action="" method="post" id="form1">
+            <label>Nombre totale de joueurs:  </label><br>
+            <input type="text" id="nbTotale" disabled>
+            <input type="button" id="ButtonIncre1" value="+">
+            <input type="button" id="ButtonDecre1" value="-" disabled>
+            <br>
+            <label>Nombre d'equipe: </label><br>
+            <input type="text" id="nbEquipe" disabled >
+            <input type="button" id="ButtonIncre2" value="+" >
+            <input type="button" id="ButtonDecre2" value="-" disabled>
+            <br>
+            <input type="button" id="validerbtn" value="Valider !" disabled="true">
+            <button type="button" class="btn-info"><i class="fas fa-info-circle"></i></button>
+            <input type="button" id="remplirAuto" value="Remplir !" hidden>
+
+
+        </form>
+
+
+        <form action="" method="post" id="form2">
+            <p><span id="nbActuel"></span></p> 
+            <input type="text" id="nom"  placeholder="Votre nom*" required><br>
+            <input type="text" id="prenom" placeholder="Votre prenom*" required><br>
+            <p id="pNiveau">Niveau :  <span id="selectedLevel"></span></p><br>
+            <p id="pScore">Score :  <span id="selectedScore"></span></p><br>
+            <input type="range" id="levelRange" min="0" max="150" value="0" step="10"><br>
+            <input type="button" id="subB" class="envoyerB" value="Enregistrer !">
+        </form>
+
+        <form id="form3">
+            <div id="listeJoueurs"></div>
+            <div id="tableauEquipes"></div>
+            <button id="Boutton-Afficher">Afficher le championnat</button>
+        </form>
+    </div>
+    <!-- <script src='FileTS.js'></script>
+    <script src='FileTSAuto.js'></script> -->
+    <script type="module" src="app/app.ts"></script>
+</body>
+</html>
