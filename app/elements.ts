@@ -8,6 +8,7 @@ export const partieAuto = document.getElementById("BouttonAuto") as HTMLButtonEl
 export const form1 = document.getElementById("form1") as HTMLFormElement;
 export const form2 = document.getElementById("form2") as HTMLFormElement;
 export const form3 = document.getElementById("form3") as HTMLFormElement;
+export const form4 = document.getElementById("form4") as HTMLFormElement;
 
 // Parti du 1er formulaire (nombres joueurs et équipes )
 //1- script pour incrementer et decrementer le nombre tot de joueurs et de joueurs par eq 
