@@ -39,8 +39,7 @@ export const numberP = document.getElementById("nbActuel") as HTMLSpanElement ;
 
 //partie 4 pour générer le championnat 
 export const afficherChampionnat = document.getElementById("Boutton-Afficher") as HTMLButtonElement;
-export const matches = generationChampionnat(currentNumber2); // obtenir le tableau des matchs générés
-export const nbJournees = matches.length; // obtenir le nombre de journées dans le championnat
+
 
 export const ChampBtn = document.getElementById("Boutton-Afficher") as HTMLInputElement;
 
