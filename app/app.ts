@@ -1,5 +1,5 @@
 import { 
-partieManuelle, partieAuto, form1, form2, form3 
+partieManuelle, partieAuto, form1, form2, form3,form4
 ,btnValider , numberInput1 , numberInput2 ,infoBtn,addButton1, subButton1, subButton2, addButton2, submitBtn
 ,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, 
 } from './elements';
@@ -75,6 +75,7 @@ numberInput2.addEventListener("input", () => {
 
 
 btnValider.addEventListener("animationend", () => {
+	
   btnValider.classList.remove("enable");
 });
 
@@ -318,23 +319,51 @@ window.addEventListener("load", () => {
 
  
  
-  //parti 4
+  //partie 4 afficher le championnat 
 
   ChampBtn.addEventListener("click", (e) => {
+	  e.preventDefault();
+	  transitionForms(form3,form4);
+	  const divChamp =document.getElementById("afficheChamp");
      const matches = generationChampionnat(currentNumber2); // obtenir le tableau des matchs générés
      const nbJournees = matches.length; // obtenir le nombre de journées dans le championnat
     // boucle à travers chaque journée
+	
+	console.log('nombre de journées'+nbJournees);
+	console.log('nombre d équipes'+currentNumber2);
+	var htmlchamp='liste des matchs <br><br><table><tr>';
+	for (let head=0 ;head<currentNumber2;head++){var num=head+1;
+		htmlchamp+='<th>journée '+num+'</th>';
+	}htmlchamp+='</tr><tr>';
+	
+	
     for (let i = 0; i < nbJournees; i++) {
      const journee = matches[i]; // obtenir le tableau des matchs pour la journée i
      const nbMatches = journee.length; // obtenir le nombre de matchs dans la journée i
     localStorage.setItem(`Journée ${i+1}`, JSON.stringify(journee)); 
+	
+	
+	 
+	
     
-      // boucle à travers chaque match de la journée i
-      for (let j = 0; j < nbMatches; j++) {
+	htmlchamp+='<td>';
+	  for (let j = 0; j < nbMatches; j++) {
+		  
+		  
        const match = journee[j]; 
        localStorage.setItem(`Match ${j+1}`, match);
-      }
+	   
+	   
+	   htmlchamp+='<li>'+journee[j]+'</li>';
+	   console.log(journee[j]);
+      
+	  }htmlchamp+='</td>';
+	  
     }
+	htmlchamp+='</tr></table>';
+	console.log(htmlchamp);
+	console.log(localStorage);
+	divChamp.innerHTML= htmlchamp;
     
     
     });
