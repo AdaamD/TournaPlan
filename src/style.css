@@ -31,7 +31,7 @@ margin-bottom: 0%;
 input[type=range]{
     margin-top: -20px;
 }
-#form1,#form2,#form3 {
+#form1,#form2,#form3, #form4 {
     display: none;
 }
 .btn-info {
@@ -60,7 +60,7 @@ input[type=range]{
 }
 table{
     display:block;
-    width: 4cm;
+    
     padding: 0px;
     border-right: 1px solid black;
     border-left: 1px solid black;
@@ -70,7 +70,7 @@ table{
     height: auto;
 }
 tr{
-     display: grid;
+     
     border-top: 1px solid black;
 }
 td{
