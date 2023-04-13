@@ -1,6 +1,8 @@
-import { partieManuelle, partieAuto, form1, form2, form3 
+import { 
+partieManuelle, partieAuto, form1, form2, form3 
 ,btnValider , numberInput1 , numberInput2 ,infoBtn,addButton1, subButton1, subButton2, addButton2, submitBtn
-,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, nbJournees,matches} from './elements';
+,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, 
+} from './elements';
 
 import {  checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat} from './functions';
 
@@ -319,11 +321,8 @@ window.addEventListener("load", () => {
   //parti 4
 
   ChampBtn.addEventListener("click", (e) => {
-
-   
-    
-    
-    
+     const matches = generationChampionnat(currentNumber2); // obtenir le tableau des matchs générés
+     const nbJournees = matches.length; // obtenir le nombre de journées dans le championnat
     // boucle à travers chaque journée
     for (let i = 0; i < nbJournees; i++) {
      const journee = matches[i]; // obtenir le tableau des matchs pour la journée i
