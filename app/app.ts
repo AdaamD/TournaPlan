@@ -1,23 +1,111 @@
 import { 
 partieManuelle, partieAuto, form1, form2, form3 
 ,btnValider , numberInput1 , numberInput2 ,infoBtn,addButton1, subButton1, subButton2, addButton2, submitBtn
-,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, 
+,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, TestButton, 
 } from './elements';
 
 import {  checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat} from './functions';
 
-partieManuelle.addEventListener("click", function() {
-  form1.style.display="block";
-  partieManuelle.style.display="none";
-  partieAuto.style.display="none";
-  localStorage.clear(); // Vider le localStorage
-});
 
 export let currentNumber1 = 0;
 export let currentNumber2 = 0;
 
 numberInput1.value = currentNumber1.toString();
 numberInput2.value = currentNumber2.toString();
+
+partieManuelle.addEventListener("click", function() {
+  localStorage.clear(); // Vider le localStorage
+  form1.style.display="block";
+  partieManuelle.style.display="none";
+  partieAuto.style.display="none";
+});
+
+partieAuto.addEventListener("click", function() {
+  localStorage.clear(); // Vider le localStorage
+  form1.style.display="block";
+  btnValider.style.display="none";
+  partieManuelle.style.display="none";
+  partieAuto.style.display="none";
+  TestButton.style.display="inline-block";
+  TestButton.disabled=false;
+
+  TestButton.addEventListener("click", function() {
+  const prenoms= ["Liam", "Emma", "Noah", "Olivia", "William", "Ava", "James", "Isabella", "Logan", "Sophia", "Benjamin", "Mia", "Lucas", "Charlotte", "Henry", "Amelia", "Alexander", "Evelyn", "Michael", "Abigail"];
+  const noms = ["Martin", "Lavoie", "Tremblay", "Gagnon", "Roy", "Côté", "Bouchard", "Gauthier", "Morin", "Lefebvre", "Girard", "Pelletier", "Leclerc", "Bergeron", "Leblanc", "Beaulieu", "Caron", "Cloutier", "Dion", "Bélanger"];
+  
+  numberInput1.value = currentNumber1.toString();
+  numberInput2.value = currentNumber2.toString();
+  let test=false;
+       
+    if (numberInput1.value == "0"||numberInput1.value == "1")  {//le cas: aucun nombre de joueur n'est inscrit manuellement 
+      if (numberInput2.value == "0"||numberInput2.value == "1")  {//le cas: aucun nombre d'equipe n'est inscrit manuellement
+  
+        currentNumber1=20;
+        numberInput1.value = currentNumber1.toString();
+  
+        currentNumber2=4;
+        numberInput2.value = currentNumber2.toString();
+  
+        test=true;
+        checkInputs();
+        
+      }else{//le cas:  nombre d'equipe  inscrit manuellement 
+          numberInput1.value = (Number(numberInput2.value)*4).toString();
+          currentNumber1=(Number(numberInput2.value)*4);// chaque equipe avec 4 joueurs
+          if(Number(numberInput1.value )<=20){//<=20 car mon tab a 20 joueurs
+            test=true;
+          }
+          else{
+            numberInput1.value ="20";
+            currentNumber1=Number(numberInput1.value);
+            test=true;
+          }
+          checkInputs();
+        }
+  
+      }
+    else{//le cas: nombre de joueur est inscrit manuellement 
+     
+      if (numberInput2.value == "0")  {//le cas: aucun nombre d'equipe n'est inscrit manuellement mais le nombre de joueur si
+        
+        if(Number(numberInput1.value)<=20){//<=20 car mon tab a 20 joueurs
+          
+          numberInput2.value = (Math.round(Number(numberInput1.value)/2)).toString();
+          currentNumber2=(Math.round(Number(numberInput1.value)/2));
+          test=true;
+        }
+        else{
+          numberInput1.value ="20";
+          currentNumber1=Number(numberInput1.value);
+          test=true;
+        }
+        checkInputs();
+      }
+      else{
+        numberInput1.value = currentNumber1.toString();
+        numberInput2.value = currentNumber2.toString();
+        checkInputs();
+        test=true
+      }
+  
+    }// le cas ou les deux sont inscrit c'est le cas de base 
+  
+      if(test) {
+        checkInputs();
+        btnValider.click();
+        TestButton.style.display ="none";
+  
+        for (let i = 0; i < Number(numberInput1.value); i++) {
+          nomInput.value=noms[i];///////////////////////////////////////
+          prenomInput.value=prenoms[i];
+          let c=(Math.floor(Math.random() * 16) * 10);
+          levelRange.value=(Object) (Math.floor(Math.random() * 16) * 10);  
+          console.log(i,nomInput.value,prenomInput.value,levelRange.value);
+          submitBtn.click();   
+        }
+    }
+});
+});
 
 addButton1.addEventListener("click", () => {
   currentNumber1 += 1;
@@ -338,5 +426,3 @@ window.addEventListener("load", () => {
     
     
     });
-
-    

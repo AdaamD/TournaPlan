@@ -1,6 +1,4 @@
-import {btnValider , numberInput1 , numberInput2 ,infoBtn,  } from './elements' ;
-
-
+import {btnValider , numberInput1 , numberInput2 ,infoBtn, TestButton, submitBtn, nomInput, prenomInput, levelRange} from './elements' ;
 
 export function checkInputs() {
   // Code pour la fonction checkInputs
@@ -8,7 +6,7 @@ export function checkInputs() {
   const nbJoueurs = Number(numberInput1.value);
   const nbTeams = Number(numberInput2.value);
 
-  if(nbTeams>0 && nbJoueurs>0){
+  if(nbTeams>1 && nbJoueurs>1){
     if((nbJoueurs%nbTeams)===0){
       validInput(numberInput1);
       validInput(numberInput2);
@@ -35,7 +33,7 @@ export function invalidInput(inputElement: HTMLInputElement) {
   const originalBorderColor = inputElement.style.borderColor;
   infoBtn.style.display="inline-block";
   infoBtn.style.backgroundColor="red";
-  infoBtn.setAttribute('title', 'saisie invalide ! le nombre de joueur/equipes ne doit pas etre nul ou nombre de joueur < nombre dequipes');
+  infoBtn.setAttribute('title', 'saisie invalide ! le nombre de joueur/equipes doit etre >1 ou nombre de joueur < nombre dequipes');
   
   infoBtn.addEventListener('mouseover', () => {});
   
@@ -158,3 +156,5 @@ const matches: string[][] = []; // tableau pour stocker les matchs
   // Retourner le tableau des matchs
   return matches;
 }
+
+//partie generer les joueurs, les equipes (PartieAuto) A REVOIR APRES...

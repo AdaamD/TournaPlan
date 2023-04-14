@@ -2,7 +2,6 @@ import {  generationChampionnat} from './functions';
 import {  currentNumber2} from './app';
 
 
-
 export const partieManuelle = document.getElementById("BouttonManuel") as HTMLButtonElement;
 export const partieAuto = document.getElementById("BouttonAuto") as HTMLButtonElement;
 export const form1 = document.getElementById("form1") as HTMLFormElement;
@@ -19,6 +18,7 @@ export const addButton2 = document.getElementById("ButtonIncre2") as HTMLInputEl
 export const subButton2 = document.getElementById("ButtonDecre2") as HTMLInputElement;
 export const infoBtn = document.querySelector(".btn-info") as HTMLButtonElement;
 export const btnValider = document.getElementById("validerbtn") as HTMLButtonElement;
+export const TestButton =  document.getElementById("remplirAuto") as HTMLInputElement;
 
 export const nomInput = document.getElementById("nom") as HTMLInputElement;
 export const prenomInput = document.getElementById("prenom") as HTMLInputElement;

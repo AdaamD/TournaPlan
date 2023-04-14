@@ -1,7 +1,7 @@
 {
   "name": "tournoi_final",
   "version": "1.0.0",
-  "description": "",
+  "description": "To make it easy for you to get started with GitLab, here's a list of recommended next steps.",
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html"
@@ -11,5 +11,6 @@
   "devDependencies": {
     "parcel": "^2.8.3",
     "typescript": "^5.0.4"
-  }
+  },
+  "main": "index.js"
 }
