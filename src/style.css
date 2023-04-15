@@ -1,59 +1,248 @@
+html {
+    margin: 0;
+    background-image: url('../img/bg-cover.jpg');
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+} 
 header {
+    z-index: 0; 
     display: flex;
     align-items: center;
 }
-img {
-    float: left;
-}
-#titleHeader {
-    margin-left: 20px;
-}
-input,label{
-    margin-bottom: 25px;
-}
-div{
-    margin-top: 50px;;
-}
-#nom,#prenom,#email{
-    width: 20%;
-}
-#pNiveau{
-margin-bottom: 0%;
-}
-#nbTotale,#nbEquipe{
+#menu_nav{
+    z-index: -1; /* changer la valeur de z-index à 1 */
+    display: flex;
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(43%);
+    display: flex;
+    justify-content: center;
     align-items: center;
-    width: 5%;
+    height: 50px; /* Ajuster la hauteur du bloc selon votre besoin */
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Ajouter cette propriété */
 }
-#AffichageESupJ{
-    display: none;
+
+ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+    margin: 0 22px;
+}
+
+a {
+  text-decoration: none;
+  color: whitesmoke;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+#texte-sport{
+    font-size: 25px;
+    font-weight: bold;
+    color: whitesmoke;
+}
+.nomSport{
+    font-size: 25px;
+    font-weight: bold;
     color: red;
 }
-input[type=range]{
-    margin-top: -20px;
+
+#div-texte-accueil {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    white-space: nowrap;
+}
+  
+#texte-sport {
+   text-align: center;
+   white-space: nowrap;
+}
+.bouton-container {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: calc(100% - 230px);
+}
+  
+.grand-bouton {
+    padding: 20px 30px;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: red;
+    color: whitesmoke;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+div{
+    margin-top: 40px;;
+}
+#choixMode{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    justify-content: center;
+}
+#BouttonManuel{
+    padding: 10px 10px;
+    margin: 10px 0px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: red;
+    color: whitesmoke;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#BouttonAuto{
+    padding: 10px 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: red;
+    color: whitesmoke;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
 }
 #form1,#form2,#form3 {
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+fieldset{
+    background-color: rgba(255, 0, 0,0.2);
+    border-radius: 10px;
+    border-style: dotted;
+    border-color: rgb(145, 144, 144);
+    width: 100%;
+}
+#form1{
+    width: 10cm;
+    text-align: center;
+}
+#partie1form1,#partie2form1{
+    display: inline-block;
+    align-items: center;
+}
+label{
+    margin-right: 20px;
+    color: whitesmoke;
+}
+#partie1form1 input[type="text"]{
+    display: inline-block;
+    width: 65px;
+    color: black;
+    background-color: whitesmoke;
+}
+#partie2from1 input[type="text"]{
+    display: inline-block;
+    width: 65px;
+    color: black;
+    background-color: whitesmoke;
+    margin-bottom: 5px;
+}
+#ButtonIncre1,#ButtonIncre2,#ButtonDecre1,#ButtonDecre2{
+    width: 20px;
+}
+#validerbtn,#remplirAuto{
+    width: 2cm;
+    text-align: center;
+    margin-top: 20px;
+}
+#form2{
+    width: 10cm;
+    text-align: center;
+    color: whitesmoke;
+}
+#nbActuel{
+    color: whitesmoke;
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+}
+#nom,#prenom{
+    text-align: center;
+    width: 200px;
+    color: black;
+    background-color: whitesmoke;
+}
+#nom,#prenom{
+    margin-bottom: 20px;
+}
+
+#pNiveau{
+    margin-bottom: -10px;
+  }
+input[type=range]{
+    margin-bottom: 15px;
 }
 .btn-info {
     display: none;
-    color: white;
+    color: whitesmoke;
     border: none;
     border-radius: 30%;
-    width: 2%;
-    height: 10%;
+    width: 7%;
+    margin-left: 7px;
     cursor: pointer;
-}
-  
+}  
 .btn-info i {
+    font-size: 16px;
+}
+#form3{
+    width: 20cm;
+    text-align: center;
+    color: whitesmoke;
+}
+#pForm3{
+    position: relative;
+    top: -15%;
+    color: whitesmoke;
+    font-weight: bold;
     font-size: 18px;
-    margin-left: -1px;
+    text-align: center;
+
 }
 #listeNbEquipe{
     width: 3cm;
     margin-bottom: 1cm;
 }
 #listeJoueurs{
-    background-color: rgb(206, 219, 200);
+    position: relative;
+    top: 0%;
+    background-color: rgba(255, 0, 0,0.3);
+    border-radius: 15px;
+    text-align: center;
+    margin-top: -8%;
 }
 #tableauEquipes{
     display:-webkit-inline-box;
@@ -62,16 +251,20 @@ table{
     display:block;
     width: 4cm;
     padding: 0px;
-    border-right: 1px solid black;
+    /* border-right: 1px solid black;
     border-left: 1px solid black;
     border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    background-color: rgb(216, 236, 245);
+    border-bottom: 1px solid black; */
+    background-color: rgba(255, 0, 0,0.2);
+    border-radius: 10px;
+    border-style: dotted;
+    border-color: rgb(145, 144, 144);
+    color: whitesmoke;
     height: auto;
 }
 tr{
      display: grid;
-    border-top: 1px solid black;
+    border-top: 1px solid whitesmoke;
 }
 td{
     text-align: center;
@@ -81,10 +274,13 @@ th{
     padding-right: 1px;
     width: inherit;
     padding-bottom: 13px;
-    border-bottom: 2px solid azure;
+    background-color: rgba(255, 0, 0,0.3);
+    border-radius: 10px;
+    border-color: rgb(145, 144, 144);
+    /* border-bottom: 2px solid azure;
     border-top: 2px solid azure;
     border-left: 2px solid black;
-    border-right: 2px solid black;
+    border-right: 2px solid black; */
 }
 
 @keyframes shake {
@@ -122,10 +318,11 @@ th{
 }
 #Boutton-Afficher {
     position: fixed;
-    bottom: 10px;
-    right: 10px;
-    margin-bottom: 10px;
-    margin-right: 10px;
-    border-color: aqua;
-    border-radius: 2%;
+    bottom: 20px;
+    margin-left: 110%;
+    width: 5cm;
+    color: whitesmoke;
+    background-color: rgba(255, 0, 0,0.3);
+    border-radius: 13%;
+    cursor: pointer;
 }

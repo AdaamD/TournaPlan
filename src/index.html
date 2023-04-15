@@ -9,54 +9,71 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    
     <header> 
-    <a href="index.html"><img src="../img/mur32.png" alt="icone tournoi" width="" height=""></a>
-    <p id="titleHeader">TournaPlan</p>  
+        <a href="index.html"><img src="../img/Logo-TournaPlanR-removebg-preview.png" alt="icone_tournoi" width="160" height=""></a> 
+        <nav id="menu_nav">
+            <ul>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">À propos</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <div>
+    <div id="choixMode">
         <button id="BouttonManuel">Partie manuelle</button>
         <button id="BouttonAuto">Partie auto</button>
     </div>
 
     <div>
         <form action="" method="post" id="form1">
-            <label>Nombre totale de joueurs:  </label><br>
-            <input type="text" id="nbTotale" disabled>
-            <input type="button" id="ButtonIncre1" value="+">
-            <input type="button" id="ButtonDecre1" value="-" disabled>
+          <fieldset>
+            <div id="partie1form1">
+                <label>Nombre totale de joueurs :  </label>
+                <input type="text" id="nbTotale" disabled>
+                <input type="button" id="ButtonIncre1" value="+">
+                <input type="button" id="ButtonDecre1" value="-" disabled>
+            </div>
             <br>
-            <label>Nombre d'equipe: </label><br>
-            <input type="text" id="nbEquipe" disabled >
-            <input type="button" id="ButtonIncre2" value="+" >
-            <input type="button" id="ButtonDecre2" value="-" disabled>
+
+            <div id="partie2from1">
+                <label>Nombre d'equipes : </label>
+                <input type="text" id="nbEquipe" disabled >
+                <input type="button" id="ButtonIncre2" value="+" >
+                <input type="button" id="ButtonDecre2" value="-" disabled>
+            </div>
             <br>
+
             <input type="button" id="validerbtn" value="Valider !" disabled="true">
-            <button type="button" class="btn-info"><i class="fas fa-info-circle"></i></button>
             <input type="button" id="remplirAuto" value="Remplir !" hidden>
+            <button type="button" class="btn-info"><i class="fas fa-info-circle"></i></button>
+          </fieldset>
 
 
         </form>
 
 
         <form action="" method="post" id="form2">
+          <fieldset>
             <p><span id="nbActuel"></span></p> 
             <input type="text" id="nom"  placeholder="Votre nom*" required><br>
             <input type="text" id="prenom" placeholder="Votre prenom*" required><br>
             <p id="pNiveau">Niveau :  <span id="selectedLevel"></span></p><br>
-            <p id="pScore">Score :  <span id="selectedScore"></span></p><br>
+            <p id="pScore">Score :  <span id="selectedScore"></span></p>
             <input type="range" id="levelRange" min="0" max="150" value="0" step="10"><br>
             <input type="button" id="subB" class="envoyerB" value="Enregistrer !">
+          </fieldset>
         </form>
 
         <form id="form3">
+            <p id="pForm3">Deplacer manuellement les joueurs dans les equipes</p>
             <div id="listeJoueurs"></div>
             <div id="tableauEquipes"></div>
             <button id="Boutton-Afficher">Afficher le championnat</button>
         </form>
     </div>
-    <!-- <script src='FileTS.js'></script>
-    <script src='FileTSAuto.js'></script> -->
+    
     <script type="module" src="../app/app.ts"></script>
 </body>
 </html>

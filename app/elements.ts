@@ -1,6 +1,11 @@
 import {  generationChampionnat} from './functions';
 import {  currentNumber2} from './app';
 
+//partie pour page d'accueil a ajouter apres
+// export const sports: string[] = ["Rugby", "Football", "Volleyball", "Handball", "Basketball","Badminton", "Tennis", "Water-Polo", "Fifa"];
+// export const sportElement = document.getElementById("texte-sport") as HTMLElement;
+// export const nomSportElement = sportElement.querySelector(".nomSport") as HTMLElement;
+// export const commencerTournoi= document.querySelector(".grand-bouton") as HTMLButtonElement
 
 export const partieManuelle = document.getElementById("BouttonManuel") as HTMLButtonElement;
 export const partieAuto = document.getElementById("BouttonAuto") as HTMLButtonElement;

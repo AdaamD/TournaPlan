@@ -1,5 +1,15 @@
 import {btnValider , numberInput1 , numberInput2 ,infoBtn, TestButton, submitBtn, nomInput, prenomInput, levelRange} from './elements' ;
 
+//partie accueil a ajouter apres 
+/*export function choisirSportSuivant(sportCourantIndex:number): string {
+  const sportSuivant: string = sports[sportCourantIndex];
+  sportCourantIndex = (sportCourantIndex + 1) % sports.length; // réinitialiser l'indice du tableau des sports s'il dépasse la fin du tableau
+  return sportSuivant;
+}
+export function mettreAJourSport(sportCourantIndex): void {
+  nomSportElement.textContent = choisirSportSuivant(sportCourantIndex);
+}*/
+
 export function checkInputs() {
   // Code pour la fonction checkInputs
   btnValider.disabled = true;
@@ -104,7 +114,11 @@ export function transitionForms(formDisparaitre : HTMLFormElement, formApparaitr
   formDisparaitre.style.display = "none";
 
   if (formDisparaitre.style.display=="none") {
-    formApparaitre.style.display = "block";
+    formApparaitre.style.display = "flex";
+    formApparaitre.style.flexDirection="column";
+    formApparaitre.style.justifyContent="center";
+    formApparaitre.style.alignItems="center";
+    formApparaitre.style.height="100vh";
     formApparaitre.classList.add("slide-right");
   }
 

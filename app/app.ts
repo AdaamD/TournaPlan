@@ -1,10 +1,23 @@
-import { 
-partieManuelle, partieAuto, form1, form2, form3 
+import { partieManuelle, partieAuto, form1, form2, form3 
 ,btnValider , numberInput1 , numberInput2 ,infoBtn,addButton1, subButton1, subButton2, addButton2, submitBtn
-,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, TestButton, 
+,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, TestButton
 } from './elements';
 
-import {  checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat} from './functions';
+import {checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat} from './functions';
+
+
+//---------------------------------------------------------------------------------------//
+/* Dans cette partie on va mettre le code ts de la page d'accueil une fois
+//Accueil
+let sportCourantIndex: number = 0;
+
+// Fonction pour mettre à jour le sport affiché
+mettreAJourSport(sportCourantIndex);
+// Mettre à jour le sport toutes les 1.5s secondes
+setInterval(mettreAJourSport, 1500);
+
+commencerTournoi.addEventListener("click", function() {*/
+//---------------------------------------------------------------------------------------//
 
 
 export let currentNumber1 = 0;
@@ -15,7 +28,7 @@ numberInput2.value = currentNumber2.toString();
 
 partieManuelle.addEventListener("click", function() {
   localStorage.clear(); // Vider le localStorage
-  form1.style.display="block";
+  form1.style.display="flex";
   partieManuelle.style.display="none";
   partieAuto.style.display="none";
 });
@@ -66,7 +79,7 @@ partieAuto.addEventListener("click", function() {
       }
     else{//le cas: nombre de joueur est inscrit manuellement 
      
-      if (numberInput2.value == "0")  {//le cas: aucun nombre d'equipe n'est inscrit manuellement mais le nombre de joueur si
+      if (numberInput2.value == "0"||numberInput2.value == "1")  {//le cas: aucun nombre d'equipe n'est inscrit manuellement mais le nombre de joueur si
         
         if(Number(numberInput1.value)<=20){//<=20 car mon tab a 20 joueurs
           
@@ -267,6 +280,10 @@ submitBtn.addEventListener("click", (event) => {
       const joueurButton = document.createElement('button');
       joueurButton.innerHTML = joueur.nom;
       joueurButton.draggable = true;
+      joueurButton.style.backgroundColor="rgba(245,245,245, 0.667)";
+      joueurButton.style.borderRadius="10px";
+      joueurButton.style.cursor="pointer"
+      
       joueurButton.addEventListener('dragstart', (e) => {
         e.dataTransfer?.setData('text/plain', JSON.stringify(joueur));
       });
