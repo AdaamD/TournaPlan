@@ -15,7 +15,8 @@ export function checkInputs() {
   btnValider.disabled = true;
   const nbJoueurs = Number(numberInput1.value);
   const nbTeams = Number(numberInput2.value);
-
+ 
+  
   if(nbTeams>1 && nbJoueurs>1){
     if((nbJoueurs%nbTeams)===0){
       validInput(numberInput1);

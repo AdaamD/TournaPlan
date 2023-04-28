@@ -19,7 +19,13 @@ setInterval(mettreAJourSport, 1500);
 commencerTournoi.addEventListener("click", function() {*/
 //---------------------------------------------------------------------------------------//
 
+/* Verificattion si Admin pour accèder à la partie Auto*/
 
+let isAdmin =true;     // true si admin, false sinon
+if(isAdmin ){
+   partieAuto.style.display = 'block'; }
+
+//---------------------------------------------------------------------------------------//
 export let currentNumber1 = 0;
 export let currentNumber2 = 0;
 
@@ -418,28 +424,30 @@ window.addEventListener("load", () => {
   nomInput.value="";
   prenomInput.value="";
   btnValider.disabled=true;
-  localStorage.clear();
+
   });
 
  
  
   //parti 4
-
   ChampBtn.addEventListener("click", (e) => {
      const matches = generationChampionnat(currentNumber2); // obtenir le tableau des matchs générés
      const nbJournees = matches.length; // obtenir le nombre de journées dans le championnat
     // boucle à travers chaque journée
     for (let i = 0; i < nbJournees; i++) {
-     const journee = matches[i]; // obtenir le tableau des matchs pour la journée i
-     const nbMatches = journee.length; // obtenir le nombre de matchs dans la journée i
-    localStorage.setItem(`Journée ${i+1}`, JSON.stringify(journee)); 
+        const journee = matches[i]; // obtenir le tableau des matchs pour la journée i
+        const nbMatches = journee.length; // obtenir le nombre de matchs dans la journée i
+        localStorage.setItem(`Journée ${i+1}`, JSON.stringify(journee)); 
     
-      // boucle à travers chaque match de la journée i
-      for (let j = 0; j < nbMatches; j++) {
-       const match = journee[j]; 
-       localStorage.setItem(`Match ${j+1}`, match);
-      }
-    }
-    
-    
+          // boucle à travers chaque match de la journée i
+        for (let j = 0; j < nbMatches; j++) 
+        {
+          const  match = journee[j]; 
+          localStorage.setItem(`Journée ${i+1} - Match ${j+1}`, JSON.stringify(match));
+        }
+    }  
     });
+  
+
+
+  

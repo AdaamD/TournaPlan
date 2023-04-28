@@ -7,6 +7,10 @@ import {  currentNumber2} from './app';
 // export const nomSportElement = sportElement.querySelector(".nomSport") as HTMLElement;
 // export const commencerTournoi= document.querySelector(".grand-bouton") as HTMLButtonElement
 
+//export const barre_recherche= document.getElementById("BarreDeRecherche") as HTMLFormElement ;
+//export const rechercheBtn = document.getElementById("SubmitBarreRecherche");
+
+
 export const partieManuelle = document.getElementById("BouttonManuel") as HTMLButtonElement;
 export const partieAuto = document.getElementById("BouttonAuto") as HTMLButtonElement;
 export const form1 = document.getElementById("form1") as HTMLFormElement;

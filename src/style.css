@@ -120,6 +120,7 @@ div{
     cursor: pointer;
 }
 #BouttonAuto{
+    display: none;
     padding: 10px 10px;
     font-size: 18px;
     font-weight: bold;
