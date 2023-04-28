@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "To make it easy for you to get started with GitLab, here's a list of recommended next steps.",
   "scripts": {
-    "dev": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "dev": "parcel src/accueil.html",
+    "build": "parcel build src/accueil.html"
   },
   "author": "",
   "license": "ISC",

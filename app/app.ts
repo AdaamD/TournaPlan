@@ -3,22 +3,11 @@ import { partieManuelle, partieAuto, form1, form2, form3
 ,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, TestButton
 } from './elements';
 
-import {checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat} from './functions';
+import {animationAccueil,checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat} from './functions';
+import{Joueur} from './joueur';
+import{Equipe} from './equipe';
 
-
-//---------------------------------------------------------------------------------------//
-/* Dans cette partie on va mettre le code ts de la page d'accueil une fois
-//Accueil
-let sportCourantIndex: number = 0;
-
-// Fonction pour mettre à jour le sport affiché
-mettreAJourSport(sportCourantIndex);
-// Mettre à jour le sport toutes les 1.5s secondes
-setInterval(mettreAJourSport, 1500);
-
-commencerTournoi.addEventListener("click", function() {*/
-//---------------------------------------------------------------------------------------//
-
+//animationAccueil();
 
 export let currentNumber1 = 0;
 export let currentNumber2 = 0;
@@ -218,6 +207,7 @@ localStorage.setItem("IActuel", JSON.stringify(iActuelNum));
 // recuperer le num du joueur actuel
 //dans cette partie le form3 sera traiter
 
+let ListeJoueurs: Array<Joueur>=Array<Joueur>();
 
 submitBtn.addEventListener("click", (event) => {
   event.preventDefault();
@@ -240,6 +230,14 @@ submitBtn.addEventListener("click", (event) => {
   // Récupération des valeurs des champs input
   const nom = nomInput.value;
   const prenom = prenomInput.value;
+
+//-----------------------------------------------------------------------
+  let j: Joueur;
+  j=new Joueur(nom,prenom,Number(levelRange.value));
+  ListeJoueurs.push(j);
+
+
+//-----------------------------------------------------------------------
 
   // utiliser l'objet enregistrer pour le mettre dans le localStorage
   let getdata = localStorage.getItem("DataDesJoeurs");
@@ -266,19 +264,24 @@ submitBtn.addEventListener("click", (event) => {
 
   if(iActuelNum>nombreDeJoueurs){
 
+    const choix = window.prompt("Veuillez choisir le mode (Manuelle ou Auto) :");
+
+
     //------- passer a la page des joueurs from3 -------// 
     transitionForms(form2,form3);
 
-    const joueurs: { nom: string, prenom: string, niveau: number }[] = JSON.parse(localStorage.getItem("DataDesJoeurs") || '[]');
+    //const joueurs: { nom: string, prenom: string, niveau: number }[] = JSON.parse(localStorage.getItem("DataDesJoeurs") || '[]');
     const boutonsAjoutes: HTMLButtonElement[] = [];
     const Tableaux:{ NombreDeJoueurs: number, NombreDTeams: number } []= JSON.parse(localStorage.getItem("DateJE") || '[]');
     const nombreTeams: number = Tableaux[0].NombreDTeams;
     const nombreJoueurs: number = Tableaux[0].NombreDeJoueurs;
     const divTableaux =document.getElementById("tableauEquipes");
+    let JoueurNom;
+    let parentBoutton;
 
-    function creerBoutonJoueur(joueur: any): HTMLButtonElement {
+    function creerBoutonJoueur(joueur: string): HTMLButtonElement {
       const joueurButton = document.createElement('button');
-      joueurButton.innerHTML = joueur.nom;
+      joueurButton.innerHTML = joueur;
       joueurButton.draggable = true;
       joueurButton.style.backgroundColor="rgba(245,245,245, 0.667)";
       joueurButton.style.borderRadius="10px";
@@ -286,15 +289,18 @@ submitBtn.addEventListener("click", (event) => {
       
       joueurButton.addEventListener('dragstart', (e) => {
         e.dataTransfer?.setData('text/plain', JSON.stringify(joueur));
+        const button = e.target as HTMLButtonElement;
+        JoueurNom = button.textContent;
+        parentBoutton=joueurButton.parentElement;
       });
       return joueurButton;
     }
 
     const joueursDiv = document.getElementById("listeJoueurs");
 
-    for (const joueur of joueurs) {
+    for (const joueur of ListeJoueurs) {
       //je cree pour chaque joueur un boutton et je le mets dans un div
-      const joueurButton = creerBoutonJoueur(joueur);
+      const joueurButton = creerBoutonJoueur(joueur.getNom());
 
       joueurButton.addEventListener('dragend', (e) => {
         const joueurButton = e.target as HTMLButtonElement;
@@ -308,7 +314,6 @@ submitBtn.addEventListener("click", (event) => {
         else if (joueursDiv) {
           joueursDiv.removeChild(joueurButton);
         }
-  
       });
 
       const joueursDiv = document.getElementById("listeJoueurs");
@@ -319,7 +324,7 @@ submitBtn.addEventListener("click", (event) => {
         break;
       }
     }
-
+    let ListeEquipe:Array<Equipe>=Array<Equipe>();
     if(divTableaux){
     for (let i = 0; i < nombreTeams; i++) {
       const tableauDiv = document.createElement("table");
@@ -328,21 +333,69 @@ submitBtn.addEventListener("click", (event) => {
       const nomColonne = document.createElement("th");
       nomColonne.textContent=`Team ${tableauDiv.id.slice(-1)}`;
 
+      let equipe:Equipe;
+      //let ListeEJ: Array<Joueur>;
+      equipe=new Equipe(i+1,Array<Joueur>());
+      ListeEquipe.push(equipe);
+
+      tableauDiv.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        });
+
       tableauDiv.appendChild(nomColonne);
       document.body.appendChild(tableauDiv);
 
-      tableauDiv.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      });
-
       tableauDiv.addEventListener('drop', (e) => {
       e.preventDefault();
+  
       const data = e.dataTransfer?.getData("text/plain");
 
       if (data) {
+        let joueur:Joueur;
+        //joueur = JSON.parse(data);
+        let trouve=false;
+        let j=0;
+        let index;
+        let k;
+        let joueurButton: HTMLButtonElement= document.createElement('button');
+        let ListeJoueurAjouter :Array<Joueur>=Array<Joueur>(); 
+        
+        for(j = 0; j < ListeEquipe.length; j++){  
+          ListeJoueurAjouter= ListeEquipe[j].getJoueurs();
+          for (index = 0; index < ListeJoueurAjouter.length; index++) {
+            if((ListeJoueurAjouter[index].getNom())==JoueurNom){
+                trouve=true;
+                ListeJoueurAjouter.splice(index,1);
+                parentBoutton.remove(index);
+                break;
+            }
+        }
+          if (trouve) {
+            break;
+          }
+          
+        }
+      
+        let equipe:Equipe;
+        equipe=ListeEquipe[i];
+        ListeJoueurAjouter =Array<Joueur>(); 
+        ListeJoueurAjouter= equipe.getJoueurs();
 
-        const joueur = JSON.parse(data);
-        const joueurButton = creerBoutonJoueur(joueur);
+        const TableauJoueurs:{ nom: string, prenom: string, niveau: number} []=JSON.parse(localStorage.getItem("DataDesJoeurs")|| '[]');
+
+        for (let k = 0; k < TableauJoueurs.length; k++) {
+
+            if(TableauJoueurs[k].nom==JoueurNom){
+              joueur= new Joueur(TableauJoueurs[k].nom,TableauJoueurs[k].prenom,TableauJoueurs[k].niveau);
+              ListeJoueurAjouter.push(joueur);
+              joueurButton=creerBoutonJoueur(joueur.getNom());
+              break;
+            }
+        }
+        
+        console.log("teams "+i+" lenth: "+equipe.getJoueurs().length);
+        // const joueur = JSON.parse(data);
+        // const joueurButton = creerBoutonJoueur(joueur);
 
         const rangee = document.createElement("tr");
         const cellule = document.createElement("td");
@@ -418,28 +471,25 @@ window.addEventListener("load", () => {
   nomInput.value="";
   prenomInput.value="";
   btnValider.disabled=true;
-  localStorage.clear();
   });
 
  
  
   //parti 4
-
   ChampBtn.addEventListener("click", (e) => {
-     const matches = generationChampionnat(currentNumber2); // obtenir le tableau des matchs générés
-     const nbJournees = matches.length; // obtenir le nombre de journées dans le championnat
-    // boucle à travers chaque journée
-    for (let i = 0; i < nbJournees; i++) {
-     const journee = matches[i]; // obtenir le tableau des matchs pour la journée i
-     const nbMatches = journee.length; // obtenir le nombre de matchs dans la journée i
-    localStorage.setItem(`Journée ${i+1}`, JSON.stringify(journee)); 
-    
-      // boucle à travers chaque match de la journée i
-      for (let j = 0; j < nbMatches; j++) {
-       const match = journee[j]; 
-       localStorage.setItem(`Match ${j+1}`, match);
-      }
-    }
-    
-    
-    });
+    const matches = generationChampionnat(currentNumber2); // obtenir le tableau des matchs générés
+    const nbJournees = matches.length; // obtenir le nombre de journées dans le championnat
+   // boucle à travers chaque journée
+   for (let i = 0; i < nbJournees; i++) {
+       const journee = matches[i]; // obtenir le tableau des matchs pour la journée i
+       const nbMatches = journee.length; // obtenir le nombre de matchs dans la journée i
+       localStorage.setItem(`Journée ${i+1}`, JSON.stringify(journee)); 
+   
+         // boucle à travers chaque match de la journée i
+       for (let j = 0; j < nbMatches; j++) 
+       {
+         const  match = journee[j]; 
+         localStorage.setItem(`Journée ${i+1} - Match ${j+1}`, JSON.stringify(match));
+       }
+   }  
+   });

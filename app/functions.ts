@@ -1,14 +1,26 @@
 import {btnValider , numberInput1 , numberInput2 ,infoBtn, TestButton, submitBtn, nomInput, prenomInput, levelRange} from './elements' ;
 
+let sportCourantIndex: number = -1;
 //partie accueil a ajouter apres 
-/*export function choisirSportSuivant(sportCourantIndex:number): string {
+export function animationAccueil() {
+
+choisirSportSuivant(sportCourantIndex++);
+
+setInterval(() => mettreAJourSport(sportCourantIndex), 1500);
+}
+
+function choisirSportSuivant(sportCourantIndex: number): string {
+  const sports: string[] = ["Rugby", "Football", "Volleyball", "Handball", "Basketball","Badminton", "Tennis", "Water-Polo", "Fifa"];
   const sportSuivant: string = sports[sportCourantIndex];
   sportCourantIndex = (sportCourantIndex + 1) % sports.length; // réinitialiser l'indice du tableau des sports s'il dépasse la fin du tableau
   return sportSuivant;
 }
-export function mettreAJourSport(sportCourantIndex): void {
+
+function mettreAJourSport(sportCourantIndex: number): void {
+  const sportElement: HTMLParagraphElement | null = document.getElementById("texte-sport") as HTMLParagraphElement;
+  const nomSportElement: HTMLSpanElement | null = sportElement.querySelector(".nomSport") as HTMLSpanElement;
   nomSportElement.textContent = choisirSportSuivant(sportCourantIndex);
-}*/
+}
 
 export function checkInputs() {
   // Code pour la fonction checkInputs
@@ -171,4 +183,3 @@ const matches: string[][] = []; // tableau pour stocker les matchs
   return matches;
 }
 
-//partie generer les joueurs, les equipes (PartieAuto) A REVOIR APRES...

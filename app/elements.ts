@@ -46,6 +46,6 @@ export const numberP = document.getElementById("nbActuel") as HTMLSpanElement ;
 export const afficherChampionnat = document.getElementById("Boutton-Afficher") as HTMLButtonElement;
 
 
-export const ChampBtn = document.getElementById("Boutton-Afficher") as HTMLInputElement;
+export const ChampBtn = document.getElementById("Boutton-Afficher") as HTMLButtonElement;
 
 

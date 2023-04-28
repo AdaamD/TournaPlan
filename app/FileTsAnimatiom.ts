@@ -12,8 +12,8 @@ function choisirSportSuivant(): string {
 
 // Fonction pour mettre à jour le sport affiché
 function mettreAJourSport(): void {
-  const sportElement: HTMLElement = document.getElementById("texte-sport");
-  const nomSportElement: HTMLElement = sportElement.querySelector(".nomSport");
+  const sportElement: HTMLParagraphElement | null = document.getElementById("texte-sport") as HTMLParagraphElement;
+  const nomSportElement: HTMLSpanElement | null = sportElement.querySelector(".nomSport") as HTMLSpanElement;
   nomSportElement.textContent = choisirSportSuivant();
 }
 
