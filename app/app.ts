@@ -7,8 +7,13 @@ import {animationAccueil,checkInputs, invalidInput, desequilibreInput, validInpu
 import{Joueur} from './joueur';
 import{Equipe} from './equipe';
 
-//animationAccueil();
+/* Verificattion si Admin pour accèder à la partie Auto*/
 
+let isAdmin =false;     // true si admin, false sinon
+if(isAdmin ){
+   partieAuto.style.display = 'block'; }
+
+//---------------------------------------------------------------------------------------//
 export let currentNumber1 = 0;
 export let currentNumber2 = 0;
 
@@ -471,10 +476,8 @@ window.addEventListener("load", () => {
   nomInput.value="";
   prenomInput.value="";
   btnValider.disabled=true;
-  });
+});
 
- 
- 
   //parti 4
   ChampBtn.addEventListener("click", (e) => {
     const matches = generationChampionnat(currentNumber2); // obtenir le tableau des matchs générés
