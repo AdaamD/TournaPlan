@@ -49,6 +49,9 @@ a {
   text-transform: uppercase;
   cursor: pointer;
 }
+#index{
+    display: none;
+}
 #texte-sport{
     font-size: 25px;
     font-weight: bold;
@@ -62,7 +65,7 @@ a {
 
 #div-texte-accueil {
     position: fixed;
-    top: 45%;
+    top: 33%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 100%;
@@ -80,7 +83,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    top: calc(100% - 230px);
+    top: calc(100% - 290px);
 }
   
 .grand-bouton {
@@ -319,7 +322,7 @@ th{
 }
 #Boutton-Afficher {
     position: fixed;
-    bottom: 20px;
+    bottom: 45px;
     margin-left: 110%;
     width: 5cm;
     color: whitesmoke;
@@ -327,3 +330,19 @@ th{
     border-radius: 13%;
     cursor: pointer;
 }
+footer{
+    color: whitesmoke;
+    position: fixed;
+    bottom: 0; 
+    width: 100%; 
+    text-align: center; 
+    font-size: 13px;
+}
+.button-no-style {
+    color: whitesmoke;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+  }
+  

@@ -1,17 +1,14 @@
 import { partieManuelle, partieAuto, form1, form2, form3 
 ,btnValider , numberInput1 , numberInput2 ,infoBtn,addButton1, subButton1, subButton2, addButton2, submitBtn
-,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, TestButton
+,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, TestButton,accueilDiv, indexDiv, commencerTournoi
+,bouttonAdmin
 } from './elements';
 
 import {animationAccueil,checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat} from './functions';
 import{Joueur} from './joueur';
 import{Equipe} from './equipe';
 
-/* Verificattion si Admin pour accèder à la partie Auto*/
-
-let isAdmin =false;     // true si admin, false sinon
-if(isAdmin ){
-   partieAuto.style.display = 'block'; }
+animationAccueil();
 
 //---------------------------------------------------------------------------------------//
 export let currentNumber1 = 0;
@@ -19,6 +16,26 @@ export let currentNumber2 = 0;
 
 numberInput1.value = currentNumber1.toString();
 numberInput2.value = currentNumber2.toString();
+
+/* Verificattion si Admin pour accèder à la partie Auto*/
+let IsAdmin = false;
+
+bouttonAdmin.addEventListener("click", function() {
+  IsAdmin=!IsAdmin;
+  if(IsAdmin){
+    partieAuto.style.display = "block";
+  }
+});
+
+commencerTournoi.addEventListener("click", function(event) {
+  event.preventDefault();
+  bouttonAdmin.disabled=true;
+  accueilDiv.style.display="none";
+  indexDiv.style.display="block";
+  if(!IsAdmin){
+    partieManuelle.click();
+  }
+});
 
 partieManuelle.addEventListener("click", function() {
   localStorage.clear(); // Vider le localStorage
@@ -286,11 +303,14 @@ submitBtn.addEventListener("click", (event) => {
 
     function creerBoutonJoueur(joueur: string): HTMLButtonElement {
       const joueurButton = document.createElement('button');
+      joueurButton.addEventListener("click", function(event) {
+        event.preventDefault();});
       joueurButton.innerHTML = joueur;
       joueurButton.draggable = true;
       joueurButton.style.backgroundColor="rgba(245,245,245, 0.667)";
       joueurButton.style.borderRadius="10px";
       joueurButton.style.cursor="pointer"
+      joueurButton.draggable=true;
       
       joueurButton.addEventListener('dragstart', (e) => {
         e.dataTransfer?.setData('text/plain', JSON.stringify(joueur));
@@ -496,3 +516,4 @@ window.addEventListener("load", () => {
        }
    }  
    });
+  

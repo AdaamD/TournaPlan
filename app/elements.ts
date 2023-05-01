@@ -1,21 +1,23 @@
 import {  generationChampionnat} from './functions';
 import {  currentNumber2} from './app';
 
-//partie pour page d'accueil a ajouter apres
-// export const sports: string[] = ["Rugby", "Football", "Volleyball", "Handball", "Basketball","Badminton", "Tennis", "Water-Polo", "Fifa"];
-// export const sportElement = document.getElementById("texte-sport") as HTMLElement;
-// export const nomSportElement = sportElement.querySelector(".nomSport") as HTMLElement;
-// export const commencerTournoi= document.querySelector(".grand-bouton") as HTMLButtonElement
+
+export const accueilDiv = document.getElementById("accueil") as HTMLFormElement;
+export const sportElement = document.getElementById("texte-sport") as HTMLElement;
+export const nomSportElement = sportElement.querySelector(".nomSport") as HTMLElement;
+export const commencerTournoi= document.querySelector(".bouton-container") as HTMLButtonElement
 
 //export const barre_recherche= document.getElementById("BarreDeRecherche") as HTMLFormElement ;
 //export const rechercheBtn = document.getElementById("SubmitBarreRecherche");
 
-
+export const indexDiv = document.getElementById("index") as HTMLFormElement;
 export const partieManuelle = document.getElementById("BouttonManuel") as HTMLButtonElement;
 export const partieAuto = document.getElementById("BouttonAuto") as HTMLButtonElement;
 export const form1 = document.getElementById("form1") as HTMLFormElement;
 export const form2 = document.getElementById("form2") as HTMLFormElement;
 export const form3 = document.getElementById("form3") as HTMLFormElement;
+
+export const bouttonAdmin= document.querySelector(".button-no-style") as HTMLButtonElement
 
 // Parti du 1er formulaire (nombres joueurs et équipes )
 //1- script pour incrementer et decrementer le nombre tot de joueurs et de joueurs par eq 

@@ -1,26 +1,25 @@
 import {btnValider , numberInput1 , numberInput2 ,infoBtn, TestButton, submitBtn, nomInput, prenomInput, levelRange} from './elements' ;
 
-// let sportCourantIndex: number = -1;
-// //partie accueil a ajouter apres 
-// export function animationAccueil() {
+const sports: string[] = ["Rugby", "Football", "Volleyball", "Handball", "Basketball","Badminton", "Tennis", "Water-Polo", "Fifa"];
 
-// choisirSportSuivant(sportCourantIndex++);
+let sportCourantIndex: number = 0;
 
-// setInterval(() => mettreAJourSport(sportCourantIndex), 1500);
-// }
+// Fonction pour choisir le sport suivant
+export function animationAccueil(): string {
+  const sportSuivant: string = sports[sportCourantIndex];
+  sportCourantIndex = (sportCourantIndex + 1) % sports.length; // réinitialiser l'indice du tableau des sports s'il dépasse la fin du tableau
+  return sportSuivant;
+}
 
-// function choisirSportSuivant(sportCourantIndex: number): string {
-//   const sports: string[] = ["Rugby", "Football", "Volleyball", "Handball", "Basketball","Badminton", "Tennis", "Water-Polo", "Fifa"];
-//   const sportSuivant: string = sports[sportCourantIndex];
-//   sportCourantIndex = (sportCourantIndex + 1) % sports.length; // réinitialiser l'indice du tableau des sports s'il dépasse la fin du tableau
-//   return sportSuivant;
-// }
+// Fonction pour mettre à jour le sport affiché
+function mettreAJourSport(): void {
+  const sportElement: HTMLParagraphElement | null = document.getElementById("texte-sport") as HTMLParagraphElement;
+  const nomSportElement: HTMLSpanElement | null = sportElement.querySelector(".nomSport") as HTMLSpanElement;
+  nomSportElement.textContent = animationAccueil();
+}
 
-// function mettreAJourSport(sportCourantIndex: number): void {
-//   const sportElement: HTMLParagraphElement | null = document.getElementById("texte-sport") as HTMLParagraphElement;
-//   const nomSportElement: HTMLSpanElement | null = sportElement.querySelector(".nomSport") as HTMLSpanElement;
-//   nomSportElement.textContent = choisirSportSuivant(sportCourantIndex);
-// }
+// Mettre à jour le sport toutes les 1.5s secondes
+setInterval(mettreAJourSport, 1500);
 
 export function checkInputs() {
   // Code pour la fonction checkInputs
