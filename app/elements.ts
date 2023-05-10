@@ -1,7 +1,3 @@
-import {  generationChampionnat} from './functions';
-import {  currentNumber2} from './app';
-
-
 export const accueilDiv = document.getElementById("accueil") as HTMLFormElement;
 export const sportElement = document.getElementById("texte-sport") as HTMLElement;
 export const nomSportElement = sportElement.querySelector(".nomSport") as HTMLElement;
@@ -16,7 +12,7 @@ export const partieAuto = document.getElementById("BouttonAuto") as HTMLButtonEl
 export const form1 = document.getElementById("form1") as HTMLFormElement;
 export const form2 = document.getElementById("form2") as HTMLFormElement;
 export const form3 = document.getElementById("form3") as HTMLFormElement;
-
+export const form4 = document.getElementById("form4") as HTMLFormElement;
 export const bouttonAdmin= document.querySelector(".button-no-style") as HTMLButtonElement
 
 // Parti du 1er formulaire (nombres joueurs et équipes )
@@ -53,5 +49,8 @@ export const afficherChampionnat = document.getElementById("Boutton-Afficher") a
 
 
 export const ChampBtn = document.getElementById("Boutton-Afficher") as HTMLButtonElement;
+
+//footer
+export const footer = document.querySelector('footer');
 
 

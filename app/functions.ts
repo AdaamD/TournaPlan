@@ -130,7 +130,7 @@ export function transitionForms(formDisparaitre : HTMLFormElement, formApparaitr
     formApparaitre.style.flexDirection="column";
     formApparaitre.style.justifyContent="center";
     formApparaitre.style.alignItems="center";
-    formApparaitre.style.height="100vh";
+    formApparaitre.style.height="100%";
     formApparaitre.classList.add("slide-right");
   }
 
@@ -163,14 +163,17 @@ const matches: string[][] = []; // tableau pour stocker les matchs
 
     for (let j = 0; j < numTeams / 2; j++) {
       // Si l'équipe j est l'équipe "Bye", alors elle joue contre la première équipe qui n'a pas encore joué contre elle
-      if (teams[j] === "Bye") {
-        journee.push(`${teams[numTeams - 1]} vs. ${teams[j + numTeams / 2]}`);
+      if (teams[j] === "Bye" || teams[numTeams-j-1]==="Bye") {
+        console.log("Bye");
       }
       // Sinon, générer un match normal entre les équipes j et (numTeams - j - 1) pour assurer que chaque équipe rencontre toutes les autres une fois
-      else {
+      if(teams[j]!== "Bye" && teams[numTeams-j-1]!=="Bye" && teams[j]!==teams[numTeams-j-1]) {
         journee.push(`${teams[j]} vs. ${teams[numTeams - j - 1]}`);
       }
-    }
+	  
+	  if(teams[j]!== "Bye" && teams[numTeams-j-1]!=="Bye" && teams[j]!==teams[numTeams-j-1])
+		console.log(teams[j]+ " ne peut pas s'affronter elle-meme");
+   }
 
     // Déplacer la dernière équipe du tableau vers la deuxième position pour faire tourner les équipes
     teams.splice(1, 0, teams.pop() as string);
@@ -182,4 +185,3 @@ const matches: string[][] = []; // tableau pour stocker les matchs
   // Retourner le tableau des matchs
   return matches;
 }
-

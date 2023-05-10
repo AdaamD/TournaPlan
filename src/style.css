@@ -6,23 +6,21 @@ html {
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+
 } 
 header {
-    z-index: 0; 
+    z-index: -1; 
+    position: relative;
     display: flex;
     align-items: center;
 }
 #menu_nav{
-    z-index: -1; /* changer la valeur de z-index à 1 */
+    z-index: 0; /* changer la valeur de z-index à 1 */
     display: flex;
-    position: fixed;
-    top: 25px;
-    left: 50%;
-    transform: translateX(43%);
-    display: flex;
+    transform: translateX(160%);
     justify-content: center;
     align-items: center;
-    height: 50px; /* Ajuster la hauteur du bloc selon votre besoin */
+    height: 30px; /* Ajuster la hauteur du bloc selon votre besoin */
     margin: 0;
     padding: 0;
     overflow: hidden; /* Ajouter cette propriété */
@@ -139,10 +137,16 @@ div{
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+#form4{
+    display: none;
+}
+
+
+
 fieldset{
     background-color: rgba(255, 0, 0,0.2);
     border-radius: 10px;
@@ -223,6 +227,10 @@ input[type=range]{
     font-size: 16px;
 }
 #form3{
+    margin-top: 12%;
+    margin-bottom: 15%;
+    height: 60%;
+    align-items: center;
     width: 20cm;
     text-align: center;
     color: whitesmoke;
@@ -233,9 +241,23 @@ input[type=range]{
     color: whitesmoke;
     font-weight: bold;
     font-size: 18px;
-    text-align: center;
-
+    text-align: start;
 }
+#form3 table{
+    width: 3cm; /* Ajustez la largeur selon vos besoins */
+    margin: 10px; /* Ajoute un peu d'espace entre chaque tableau */
+    background-color: rgba(255, 0, 0, 0.2);
+    border-radius: 10px;
+    border-style: dotted;
+    border-color: rgb(145, 144, 144);
+    color: whitesmoke;
+    height: auto;
+}
+
+#inputNumber{
+	width: 2em;
+}
+
 #listeNbEquipe{
     width: 3cm;
     margin-bottom: 1cm;
@@ -249,26 +271,51 @@ input[type=range]{
     margin-top: -8%;
 }
 #tableauEquipes{
-    display:-webkit-inline-box;
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de sauter de ligne */
+    justify-content: center;
 }
-table{
-    display:block;
-    width: 4cm;
-    padding: 0px;
-    /* border-right: 1px solid black;
-    border-left: 1px solid black;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black; */
-    background-color: rgba(255, 0, 0,0.2);
+#form4 {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    align-items: center;
+}
+#tableauJournee{
+    display: flex;
+    flex-wrap: wrap; /* Permet aux éléments de sauter de ligne */
+    justify-content: center;
+}
+
+#pForm4{
+    display: flex;
+    justify-content: center ;
+    align-items: center;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: start;
+}
+#form4 input[type="number"]{
+    width: 35px;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+#form4 table{
+    width: 8cm; /* Ajustez la largeur selon vos besoins */
+    margin: 10px; /* Ajoute un peu d'espace entre chaque tableau */
+    background-color: rgba(255, 0, 0, 0.2);
     border-radius: 10px;
     border-style: dotted;
     border-color: rgb(145, 144, 144);
     color: whitesmoke;
     height: auto;
+    
 }
+
 tr{
-     display: grid;
+     /*display: grid;*/
     border-top: 1px solid whitesmoke;
+	
 }
 td{
     text-align: center;
@@ -281,10 +328,6 @@ th{
     background-color: rgba(255, 0, 0,0.3);
     border-radius: 10px;
     border-color: rgb(145, 144, 144);
-    /* border-bottom: 2px solid azure;
-    border-top: 2px solid azure;
-    border-left: 2px solid black;
-    border-right: 2px solid black; */
 }
 
 @keyframes shake {
@@ -322,21 +365,34 @@ th{
 }
 #Boutton-Afficher {
     position: fixed;
-    bottom: 45px;
-    margin-left: 110%;
+    bottom: 15px;
+    margin-left: 120%;
     width: 5cm;
     color: whitesmoke;
     background-color: rgba(255, 0, 0,0.3);
     border-radius: 13%;
     cursor: pointer;
 }
+#Boutton-Simuler {
+	position: fixed;
+    bottom: 45px;
+    margin-left: 110%;
+    width: 5cm;
+    color: whitesmoke;
+    background-color: rgba(255, 0, 0,0.3);
+    border-radius: 13%;
+    cursor: pointer;	
+}
 footer{
     color: whitesmoke;
     position: fixed;
-    bottom: 0; 
+    bottom: 0;
+    left: 0;
+    right: 0; 
     width: 100%; 
     text-align: center; 
     font-size: 13px;
+    z-index: -1;
 }
 .button-no-style {
     color: whitesmoke;

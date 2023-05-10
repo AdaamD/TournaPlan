@@ -1,10 +1,11 @@
-import { partieManuelle, partieAuto, form1, form2, form3 
+import { partieManuelle, partieAuto, form1, form2, form3 ,form4
 ,btnValider , numberInput1 , numberInput2 ,infoBtn,addButton1, subButton1, subButton2, addButton2, submitBtn
 ,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, TestButton,accueilDiv, indexDiv, commencerTournoi
 ,bouttonAdmin
 } from './elements';
 
 import {animationAccueil,checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat} from './functions';
+import { footer } from './elements';
 import{Joueur} from './joueur';
 import{Equipe} from './equipe';
 
@@ -25,6 +26,7 @@ bouttonAdmin.addEventListener("click", function() {
   if(IsAdmin){
     partieAuto.style.display = "block";
   }
+  console.log(IsAdmin);
 });
 
 commencerTournoi.addEventListener("click", function(event) {
@@ -34,6 +36,9 @@ commencerTournoi.addEventListener("click", function(event) {
   indexDiv.style.display="block";
   if(!IsAdmin){
     partieManuelle.click();
+  }
+  if(footer){
+    footer.style.display="none";
   }
 });
 
@@ -356,7 +361,8 @@ submitBtn.addEventListener("click", (event) => {
       tableauDiv.id = `tableau${i+1}`;
       tableauDiv.classList.add("tableau");
       const nomColonne = document.createElement("th");
-      nomColonne.textContent=`Team ${tableauDiv.id.slice(-1)}`;
+      let idColonne = tableauDiv.id.match(/\d+/)![0];
+      nomColonne.textContent = `Equipe ${idColonne}`;
 
       let equipe:Equipe;
       //let ListeEJ: Array<Joueur>;
@@ -500,20 +506,133 @@ window.addEventListener("load", () => {
 
   //parti 4
   ChampBtn.addEventListener("click", (e) => {
-    const matches = generationChampionnat(currentNumber2); // obtenir le tableau des matchs générés
-    const nbJournees = matches.length; // obtenir le nombre de journées dans le championnat
-   // boucle à travers chaque journée
-   for (let i = 0; i < nbJournees; i++) {
-       const journee = matches[i]; // obtenir le tableau des matchs pour la journée i
-       const nbMatches = journee.length; // obtenir le nombre de matchs dans la journée i
-       localStorage.setItem(`Journée ${i+1}`, JSON.stringify(journee)); 
-   
-         // boucle à travers chaque match de la journée i
-       for (let j = 0; j < nbMatches; j++) 
-       {
-         const  match = journee[j]; 
-         localStorage.setItem(`Journée ${i+1} - Match ${j+1}`, JSON.stringify(match));
+	  e.preventDefault();
+	  transitionForms(form3,form4);
+	  const divChamp =document.getElementById("listeMatches");
+     const matches = generationChampionnat(currentNumber2); // obtenir le tableau des matchs générés
+     const nbJournees = matches.length; // obtenir le nombre de journées dans le championnat
+    // boucle à travers chaque journée
+	
+	
+	console.log('nombre de journées'+nbJournees);
+	console.log('nombre d équipes'+currentNumber2);
+
+  const divTableaux =document.getElementById("tableauJournee");
+  let tableauDivJournee;
+  let input1, input2;
+	
+	
+	if (currentNumber2%2==0){
+	for (let head=0 ;head<currentNumber2-1;head++){
+    tableauDivJournee = document.createElement("table");
+    tableauDivJournee.id = `tableau${head+1}`;
+    tableauDivJournee.classList.add("tableau");
+    const nomColonne = document.createElement("th");
+    let idColonne = tableauDivJournee.id.match(/\d+/)![0];
+    nomColonne.textContent = `Journée ${idColonne}`;
+
+    tableauDivJournee.appendChild(nomColonne);
+
+    if(divTableaux){
+      divTableaux.appendChild(tableauDivJournee);
+    }
+
+    const journee = matches[head]; // obtenir le tableau des matchs pour la journée i
+    const nbMatches = journee.length; // obtenir le nombre de matchs dans la journée i
+    localStorage.setItem(`Journée ${head+1}`, JSON.stringify(journee)); 
+
+    for (let j = 0; j < nbMatches; j++) {		 
+     const rangee = document.createElement("tr");
+     const cellule = document.createElement("td"); 
+
+     const match = journee[j]; 
+     localStorage.setItem(`Match ${j+1}`, match); 
+     input1=document.createElement("input");
+     input1.type="number";
+     input1.min="0";
+     input1.id="input1Score";
+
+     input2=document.createElement("input");
+     input2.type="number";
+     input2.min="0";
+     input2.id="input2Score";
+
+     const divMatch = document.createElement("div");
+     divMatch.id=`divMatch${j+1}`;
+
+     const matchJ = document.createTextNode(journee[j]);
+
+     divMatch.appendChild(input1);
+     divMatch.appendChild(matchJ);
+     divMatch.appendChild(input2);
+     
+     cellule.appendChild(divMatch);
+     rangee.appendChild(cellule);
+
+
+     if(tableauDivJournee){
+       tableauDivJournee.appendChild(rangee);
+     }   
+   }
+	}
+	}
+  
+	else {
+		for (let head=0 ;head<currentNumber2;head++){
+      tableauDivJournee = document.createElement("table");
+      tableauDivJournee.id = `tableau${head+1}`;
+      tableauDivJournee.classList.add("tableau");
+      const nomColonne = document.createElement("th");
+      let idColonne = tableauDivJournee.id.match(/\d+/)![0];
+      nomColonne.textContent = `Journée ${idColonne}`;
+
+      tableauDivJournee.appendChild(nomColonne);
+      if(divTableaux){
+        divTableaux.appendChild(tableauDivJournee);
+      }
+
+
+        const journee = matches[head]; // obtenir le tableau des matchs pour la journée i
+        const nbMatches = journee.length; // obtenir le nombre de matchs dans la journée i
+        localStorage.setItem(`Journée ${head+1}`, JSON.stringify(journee)); 
+    
+        for (let j = 0; j < nbMatches; j++) {		 
+         const rangee = document.createElement("tr");
+         const cellule = document.createElement("td"); 
+    
+         const match = journee[j]; 
+         localStorage.setItem(`Match ${j+1}`, match); 
+         input1=document.createElement("input");
+         input1.type="number";
+         input1.min="0";
+         input1.id="input1Score";
+    
+         input2=document.createElement("input");
+         input2.type="number";
+         input2.min="0";
+         input2.id="input2Score";
+    
+         const divMatch = document.createElement("div");
+         divMatch.id=`divMatch${j+1}`;
+    
+         const matchJ = document.createTextNode(journee[j]);
+    
+         divMatch.appendChild(input1);
+         divMatch.appendChild(matchJ);
+         divMatch.appendChild(input2);
+         
+         cellule.appendChild(divMatch);
+         rangee.appendChild(cellule);
+    
+    
+         if(tableauDivJournee){
+           tableauDivJournee.appendChild(rangee);
+         }
+      }
+    
+       
        }
-   }  
+	}	
+    
    });
   
