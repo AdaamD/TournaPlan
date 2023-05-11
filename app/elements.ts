@@ -56,7 +56,6 @@ export const profilLi = document.getElementById("profilLi") as HTMLButtonElement
 export const profilDiv = document.getElementById("profilDiv") as HTMLButtonElement;
 
 
-  
 
 //footer
 export const footer = document.querySelector('footer');

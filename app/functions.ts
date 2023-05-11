@@ -1,7 +1,5 @@
 import {btnValider , numberInput1 , numberInput2 ,infoBtn, TestButton, submitBtn, nomInput, prenomInput, levelRange} from './elements' ;
 import { Equipe } from './equipe';
-import { Joueur } from './joueur';
-
 const sports: string[] = ["Rugby", "Football", "Volleyball", "Handball", "Basketball","Badminton", "Tennis", "Water-Polo", "Fifa"];
 
 let sportCourantIndex: number = 0;
@@ -173,20 +171,21 @@ const matches: string[][] = []; // tableau pour stocker les matchs
         journee.push(`${teams[j]} vs. ${teams[numTeams - j - 1]}`);
       }
 	  
-	  if(teams[j]!== "Bye" && teams[numTeams-j-1]!=="Bye" && teams[j]!==teams[numTeams-j-1])
-		console.log(teams[j]+ " ne peut pas s'affronter elle-meme");
-   }
+      if(teams[j]!== "Bye" && teams[numTeams-j-1]!=="Bye" && teams[j]!==teams[numTeams-j-1])
+      console.log(teams[j]+ " ne peut pas s'affronter elle-meme");
+     }
+  
+      // Déplacer la dernière équipe du tableau vers la deuxième position pour faire tourner les équipes
+      teams.splice(1, 0, teams.pop() as string);
+  
+      // Ajouter les matchs du tour au tableau des matchs
+      matches.push(journee);
+    }
+  
+    // Retourner le tableau des matchs
+    return matches;
+  }  
 
-    // Déplacer la dernière équipe du tableau vers la deuxième position pour faire tourner les équipes
-    teams.splice(1, 0, teams.pop() as string);
-
-    // Ajouter les matchs du tour au tableau des matchs
-    matches.push(journee);
-  }
-
-  // Retourner le tableau des matchs
-  return matches;
-}
   //partie profil
   //fonction pour mettre tous les div en cours a none
   export function turnNone(){
