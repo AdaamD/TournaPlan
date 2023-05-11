@@ -1,7 +1,7 @@
 import { partieManuelle, partieAuto, form1, form2, form3 ,form4
 ,btnValider , numberInput1 , numberInput2 ,infoBtn,addButton1, subButton1, subButton2, addButton2, submitBtn
 ,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, TestButton,accueilDiv, indexDiv, commencerTournoi
-,bouttonAdmin, ButtonManuelle,ButtonAuto,divAutoManuelle,pManuelle,pAuto,divGeneral
+,bouttonAdmin, ButtonManuelle,ButtonAuto,divAutoManuelle,pManuelle,pAuto,divGeneral,newJoueur,submitBtnNew,divchoixequipe 
 } from './elements';
 
 import {animationAccueil,checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat,creerEquipes} from './functions';
@@ -710,20 +710,155 @@ window.addEventListener("load", () => {
 profilBtn.addEventListener("click", () =>{
   turnNone();
   profilDiv.style.display="block";
+  newJoueur.style.display="block";
   //Creation du div de base pour le tableau
   const pTabDiv = document.createElement('div');
+
+
+  
 
 
 // Appel de la fonction avec la liste de joueurs, le tableau et l'en-tête créés à l'extérieur
 for (const equipe of ListeEquipe) {
   console.log(equipe.getIdentifiant());
+  if(equipe.getIdentifiant()!=999)
+  {
   generationTableauAffichage(equipe, pTabDiv);
-}
+}}
 
 
 // Ajout du tableau au DOM
 profilDiv.appendChild(pTabDiv);
 divGeneral.style.display="block";
 pTabDiv.style.display="block";
+
+
+
   
 });
+//Ajout pour le nouveau joueur
+newJoueur.addEventListener("click", () =>{
+  profilDiv.style.display="none";
+  transitionForms(form4,form2);
+  submitBtn.style.display="none";
+  submitBtnNew.style.display="block";
+  numberP.textContent = "Nouveau Joueur";
+  divchoixequipe.style.display="block";
+
+  // Obtenez l'élément parent dans lequel vous souhaitez ajouter les cases à cocher
+
+
+// Tableau contenant les libellés des cases à cocher
+nomInput.focus();
+nomInput.value="";
+prenomInput.value="";
+levelRange.value="0";
+selectedScore.innerText= "0";
+divchoixequipe.innerHTML = "";
+const labels = ListeEquipe;
+
+
+
+const group = "myCheckboxGroup";
+
+// Événement de gestion de la sélection mutuellement exclusive
+function handleCheckboxSelection(event: Event) {
+  const selectedCheckbox = event.target as HTMLInputElement;
+
+  // Désélectionner toutes les autres cases à cocher du groupe
+  const checkboxes = document.getElementsByName(group) as NodeListOf<HTMLInputElement>;
+  checkboxes.forEach((checkbox) => {
+    if (checkbox !== selectedCheckbox) {
+      checkbox.checked = false;
+    }
+  });
+}
+
+
+// Boucle pour créer et ajouter chaque case à cocher
+
+for (let i = 0; i < labels.length; i++) {
+  // Créer la case à cocher
+
+  if(labels[i].getIdentifiant()!=999)
+  {
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.id = `${i+1}`;
+  checkbox.name = group; // Associer la case à cocher au groupe
+  if (i==0) {
+    checkbox.checked=true;
+  }
+
+  // Créer une étiquette pour la case à cocher
+  const label = document.createElement("label");
+  label.htmlFor = `checkbox${i}`;
+  label.textContent ="Equipe "+labels[i].getIdentifiant().toString();
+
+  checkbox.addEventListener("change", handleCheckboxSelection);
+
+  // Ajouter la case à cocher et l'étiquette à l'élément parent
+  divchoixequipe.appendChild(checkbox);
+  divchoixequipe.appendChild(label);
+}}
+});
+
+
+submitBtnNew.addEventListener("click", () =>{
+
+
+  //Ajout joueur 
+
+  if(nomInput.value!=="" && prenomInput.value!==""){
+   
+    submitBtnNew.disabled=false;
+    // Récupération des valeurs des champs input
+    const nom = nomInput.value;
+    const prenom = prenomInput.value;
+  
+    
+   
+    //Recuperer l'equipe selectionne
+
+    // Obtenez toutes les cases à cocher du groupe
+const checkboxes = document.getElementsByName("myCheckboxGroup") as NodeListOf<HTMLInputElement>;
+
+// Variable pour stocker le contenu de la case à cocher sélectionnée
+let equipeselect:number=-1;
+
+// Parcours des cases à cocher pour trouver celle qui est sélectionnée
+for (let i = 0; i < checkboxes.length; i++) {
+  const checkbox = checkboxes[i];
+  
+  if (checkbox.checked) {
+    // La case à cocher est sélectionnée, récupérer son contenu
+    console.log(checkbox.id);
+    equipeselect =parseInt(checkbox.id, 10) ;
+    console.log(equipeselect);
+    break;
+  }
+}
+    
+    
+for(let i=0;i<ListeEquipe.length;i++)
+{
+  console.log("id "+ListeEquipe[i].getIdentifiant());
+  if(ListeEquipe[i].getIdentifiant()==equipeselect){
+    let j:Joueur;
+    j=new Joueur(nom,prenom,Number(levelRange.value));
+    ListeEquipe[i].getJoueurs().push(j);
+    break;
+  }
+      
+}
+console.log("equipeg"+ListeEquipe[i].getIdentifiant());
+//Ajout du joueur
+
+//Affichage du profil
+form2.style.display="none";
+
+profilBtn.click();
+}
+else{
+  window.alert("Veuillez remplir les champs avant d'enregistrer !!!");
+}});

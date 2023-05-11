@@ -32,10 +32,12 @@ export const nomInput = document.getElementById("nom") as HTMLInputElement;
 export const prenomInput = document.getElementById("prenom") as HTMLInputElement;
 export const levelRange = document.getElementById("levelRange") as HTMLInputElement; ;
 export const submitBtn = document.getElementById("subB") as HTMLInputElement;
+export const submitBtnNew = document.getElementById("subnewjoueur") as HTMLInputElement;
 
 export const pManuelle = document.getElementById("pForm3") as HTMLParagraphElement;
 export const pAuto = document.getElementById("pForm31") as HTMLParagraphElement;
 export const divAutoManuelle = document.getElementById("divChoixMode") as HTMLDivElement;
+
 export const ButtonManuelle = document.getElementById("Boutton-Manuelle") as HTMLButtonElement;
 export const ButtonAuto = document.getElementById("Boutton-Auto") as HTMLButtonElement;
 
@@ -61,6 +63,11 @@ export const ChampBtn = document.getElementById("Boutton-Afficher") as HTMLButto
 export const profilBtn = document.getElementById("profilBtn") as HTMLButtonElement;
 export const profilLi = document.getElementById("profilLi") as HTMLButtonElement;
 export const profilDiv = document.getElementById("profilDiv") as HTMLButtonElement;
+export const newJoueur = document.getElementById("newJoueur") as HTMLButtonElement;
+
+export const divchoixequipe = document.getElementById("EquipenewJou") as HTMLDivElement;
+
+
 
 
 //footer

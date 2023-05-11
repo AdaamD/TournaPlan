@@ -146,48 +146,40 @@ export function transitionForms(formDisparaitre : HTMLElement, formApparaitre : 
 
 export function generationChampionnat(Equipes: Array<Equipe>): Match[][] {
   
-const matches: Match[] []= []; // tableau pour stocker les matchs
-let x : number=0;
-
-
-  // Si le nombre d'équipes est impair, ajouter une équipe fictive pour que chaque équipe ait un adversaire à chaque tour
+  const matches: Match[] []= []; // tableau pour stocker les matchs
+  let x : number=0;
+  
+  
   if (Equipes.length % 2 !== 0) {
-    Equipes.push(new Equipe(999,[]));//999=Bye
-    Equipes.length++;
+    Equipes.push(new Equipe(999,[])); // Ajout d'une équipe fictive
   }
-
-  // Générer les matchs pour chaque tour
-  for (let i = 0; i < Equipes.length - 1; i++) {
-    let journee: Match[]=[]; 
-
-    for (let j = 0; j < Equipes.length / 2; j++) {
-      if (Equipes[j].getIdentifiant() === 999 || Equipes[Equipes.length-j-1].getIdentifiant()===999) {
-        console.log("Bye");
-      }
-     
-      if(Equipes[j].getIdentifiant() != 999 && Equipes[Equipes.length-j-1].getIdentifiant()!==999 && Equipes[j]!==Equipes[Equipes.length-j-1]) {
-        let match=new Match(x,Equipes[j],Equipes[Equipes.length - j - 1]);
+  
+  const nbTours = Equipes.length - 1;
+  const mid = Math.floor(Equipes.length / 2);
+  
+  for (let i = 0; i < nbTours; i++) {
+    let journee: Match[] = [];
+    for (let j = 0; j < mid; j++) {
+      if (Equipes[j].getIdentifiant() != 999 && Equipes[Equipes.length-j-1].getIdentifiant() !== 999 && Equipes[j] !== Equipes[Equipes.length-j-1]) {
+        let match = new Match(x, Equipes[j], Equipes[Equipes.length - j - 1]);
         journee.push(match);
         x++;
       }
-	  
-	  if(Equipes[j].getIdentifiant() != 999 && Equipes[Equipes.length-j-1].getIdentifiant()!==999 && Equipes[j]!==Equipes[Equipes.length-j-1])
-		  console.log(Equipes[j]+ " ne peut pas s'affronter elle-meme");
     }
-
-
-  const equipe: Equipe | undefined = Equipes.pop();
-  if (equipe instanceof Equipe) {
-    Equipes.splice(1, 0, equipe);
+  
+    // Rotation des équipes
+    const equipe: Equipe | undefined = Equipes.pop();
+    if (equipe instanceof Equipe) {
+      Equipes.splice(1, 0, equipe);
+    }
+  
+      matches.push(journee);
+    }
+  
+    // Retourner le tableau des matchs
+    return matches;
   }
-
-
-    matches.push(journee);
-  }
-
-  // Retourner le tableau des matchs
-  return matches;
-}
+  
 
 //fonction repartion automatique des joueurs
 
