@@ -14,22 +14,21 @@ body {
     font-family: 'Montserrat', sans-serif;
   }
 header {
-    z-index: -1; 
+z-index: -1; 
     position: relative;
     display: flex;
     align-items: center;
 }
-#menu_nav {
-    z-index: 0; /* changer la valeur de z-index à 1 */
+#menu_nav{
+z-index: 0; /* changer la valeur de z-index à 1 */
     display: flex;
     transform: translateX(160%);
     justify-content: center;
     align-items: center;
-    height: 30px; /* Ajuster la hauteur du bloc selon votre besoin */
+ height: 30px; /* Ajuster la hauteur du bloc selon votre besoin */
     margin: 0;
     padding: 0;
     overflow: hidden; /* Ajouter cette propriété */
-   
 }
 /* =====================profil==================== */
 #tableau{
@@ -58,10 +57,10 @@ header {
     width: 100%;
 
 }
-/* ============================================== */
 .style_btn_dev_menu{
     display: none ;
 }
+/* ============================================== */
 
 ul {
   list-style: none;
@@ -280,6 +279,8 @@ input[type=range]{
     font-size: 18px;
     text-align: start;
 }
+
+
 #form3 table{
     width: 3cm; /* Ajustez la largeur selon vos besoins */
     margin: 10px; /* Ajoute un peu d'espace entre chaque tableau */
@@ -308,7 +309,7 @@ input[type=range]{
     margin-top: -8%;
 }
 #tableauEquipes{
-    display: flex;
+display: flex;
     flex-wrap: wrap; /* Permet aux éléments de sauter de ligne */
     justify-content: center;
 }
@@ -350,7 +351,7 @@ input[type=range]{
 }
 
 tr{
-     /*display: grid;*/
+    /*display: grid;*/
     border-top: 1px solid whitesmoke;
 	
 }
