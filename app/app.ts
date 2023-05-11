@@ -42,6 +42,7 @@ import{Equipe} from './equipe';
   commencerTournoi.addEventListener("click", function(event) {
     event.preventDefault();
     bouttonAdmin.disabled=true;
+    profilLi.style.display="none";
     accueilDiv.style.display="none";
     indexDiv.style.display="block";
     if(!IsAdmin){
@@ -517,6 +518,7 @@ import{Equipe} from './equipe';
     //parti 4
     ChampBtn.addEventListener("click", (e) => {
       e.preventDefault();
+      profilLi.style.display="block";
       transitionForms(form3,form4);
       const divChamp =document.getElementById("listeMatches");
        const matches = generationChampionnat(currentNumber2); // obtenir le tableau des matchs générés
