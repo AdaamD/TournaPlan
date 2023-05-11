@@ -4,14 +4,14 @@ import { partieManuelle, partieAuto, form1, form2, form3 ,form4
   ,bouttonAdmin
   } from './elements';
   
-  import {animationAccueil,checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat} from './functions';
-  import { footer } from './elements';
+import {animationAccueil,checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat} from './functions';
+import { footer } from './elements';
   // ============Profil=================================
 import { profilBtn,profilLi,profilDiv } from './elements';
 import { generationTableauAffichage,turnNone } from './functions';
 // =====================================================
-  import{Joueur} from './joueur';
-  import{Equipe} from './equipe';
+import{Joueur} from './joueur';
+import{Equipe} from './equipe';
   
   animationAccueil();
   
@@ -21,6 +21,12 @@ import { generationTableauAffichage,turnNone } from './functions';
   
   numberInput1.value = currentNumber1.toString();
   numberInput2.value = currentNumber2.toString();
+
+  //partie Profil=====================
+  profilLi.style.display="none";
+  profilDiv.style.display="none";
+  let ListeEquipe:Array<Equipe>=Array<Equipe>();
+  //=========================================
   
   /* Verificattion si Admin pour accèder à la partie Auto*/
   let IsAdmin = false;
@@ -358,7 +364,7 @@ import { generationTableauAffichage,turnNone } from './functions';
           break;
         }
       }
-      let ListeEquipe:Array<Equipe>=Array<Equipe>();
+      
       if(divTableaux){
       for (let i = 0; i < nombreTeams; i++) {
         const tableauDiv = document.createElement("table");
@@ -370,6 +376,143 @@ import { generationTableauAffichage,turnNone } from './functions';
   
         let equipe:Equipe;
         //let ListeEJ: Array<Joueur>;
+        equipe=new Equipe(i+1,Array<Joueur>());
+        ListeEquipe.push(equipe);
+  
+        tableauDiv.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          });
+  
+        tableauDiv.appendChild(nomColonne);
+        document.body.appendChild(tableauDiv);
+  
+        tableauDiv.addEventListener('drop', (e) => {
+        e.preventDefault();
+    
+        const data = e.dataTransfer?.getData("text/plain");
+  
+        if (data) {
+          let joueur:Joueur;
+          //joueur = JSON.parse(data);
+          let trouve=false;
+          let j=0;
+          let index;
+          let k;
+          let joueurButton: HTMLButtonElement= document.createElement('button');
+          let ListeJoueurAjouter :Array<Joueur>=Array<Joueur>(); 
+          
+          for(j = 0; j < ListeEquipe.length; j++){  
+            ListeJoueurAjouter= ListeEquipe[j].getJoueurs();
+            for (index = 0; index < ListeJoueurAjouter.length; index++) {
+              if((ListeJoueurAjouter[index].getNom())==JoueurNom){
+                  trouve=true;
+                  ListeJoueurAjouter.splice(index,1);
+                  parentBoutton.remove(index);
+                  break;
+              }
+          }
+            if (trouve) {
+              break;
+            }
+            
+          }
+        
+          let equipe:Equipe;
+          equipe=ListeEquipe[i];
+          ListeJoueurAjouter =Array<Joueur>(); 
+          ListeJoueurAjouter= equipe.getJoueurs();
+  
+          const TableauJoueurs:{ nom: string, prenom: string, niveau: number} []=JSON.parse(localStorage.getItem("DataDesJoeurs")|| '[]');
+  
+          for (let k = 0; k < TableauJoueurs.length; k++) {
+  
+              if(TableauJoueurs[k].nom==JoueurNom){
+                joueur= new Joueur(TableauJoueurs[k].nom,TableauJoueurs[k].prenom,TableauJoueurs[k].niveau);
+                ListeJoueurAjouter.push(joueur);
+                joueurButton=creerBoutonJoueur(joueur.getNom());
+                break;
+              }
+          }
+          
+          console.log("teams "+i+" lenth: "+equipe.getJoueurs().length);
+          // const joueur = JSON.parse(data);
+          // const joueurButton = creerBoutonJoueur(joueur);
+  
+          const rangee = document.createElement("tr");
+          const cellule = document.createElement("td");
+  
+          cellule.appendChild(joueurButton);
+          rangee.appendChild(cellule);
+          tableauDiv.appendChild(rangee);
+        }
+        });
+         divTableaux.appendChild(tableauDiv);
+         
+      }
+    }
+    else{
+      console.log("Pas de div tableau Equipes!! verifiez divTableaux");
+    }
+    }
+  }
+  else{
+    alert("Veuillez remplir les champs !");
+  }
+  });
+  
+  
+  
+  
+  
+  //3-partie input range pour niveau
+  
+  // partie 2 sélecteur niveau 
+  
+  selectedLevel.innerText= valeurParDefaut;
+  selectedScore.innerText= "0"
+  
+  
+  levelRange.addEventListener("input", function() {
+    switch (true) {
+      case (Number(levelRange.value) >= 0 && Number(levelRange.value) <= 50):
+        selectedLevel.innerText = "Débutant";
+        selectedScore.innerText= levelRange.value;
+        break;
+      case (Number(levelRange.value) >= 51 && Number(levelRange.value) <= 100):
+        selectedLevel.innerText = "Semi-pro";
+        selectedScore.innerText= levelRange.value;
+        break;
+      case (Number(levelRange.value) >= 101 && Number(levelRange.value) <= 150):
+        selectedLevel.innerText = "Pro";
+        selectedScore.innerText= levelRange.value;
+        break;
+      default:
+        selectedLevel.innerText = valeurParDefaut;
+        selectedScore.innerText= "0";
+        break;
+    }
+  });
+  
+  
+  
+  });
+  
+  
+  
+  //PARTI FORM3
+  
+  
+  window.addEventListener("load", () => {
+   
+    const valeurParDefaut="Débutant";
+    levelRange.value = "0";
+    selectedLevel.innerText= valeurParDefaut;
+    selectedScore.innerText= "0";
+    nomInput.focus();
+    nomInput.value="";
+    prenomInput.value="";
+    btnValider.disabled=true;
+  });
   
     //parti 4
     ChampBtn.addEventListener("click", (e) => {
@@ -502,8 +645,7 @@ import { generationTableauAffichage,turnNone } from './functions';
         }	
     
       });
-      
-//partie profil
+      //partie profil
 
 
 profilBtn.addEventListener("click", function(event) {
@@ -542,3 +684,6 @@ pTabDiv.appendChild(tableau);
 document.body.appendChild(pTabDiv);
   
 });
+  
+     
+           
