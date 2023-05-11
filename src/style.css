@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-
 html {
     margin: 0;
     background-image: url('../img/bg-cover.jpg');
@@ -10,25 +9,19 @@ html {
     background-attachment: fixed;
 
 } 
-body {
-    font-family: 'Montserrat', sans-serif;
-  }
 header {
-z-index: -1; 
     position: relative;
     display: flex;
     align-items: center;
+    color: whitesmoke;
 }
 #menu_nav{
-z-index: 0; /* changer la valeur de z-index à 1 */
-    display: flex;
-    transform: translateX(160%);
-    justify-content: center;
-    align-items: center;
- height: 30px; /* Ajuster la hauteur du bloc selon votre besoin */
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* Ajouter cette propriété */
+    color: whitesmoke;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    padding: 10px;
 }
 /* =====================profil==================== */
 #tableau{
@@ -38,17 +31,27 @@ z-index: 0; /* changer la valeur de z-index à 1 */
     border-color: rgb(145, 144, 144);
     width: 100%;
 }
-#menu_nav button{
-    background-color: transparent;
-    display: flex ;
-    justify-content: center;
-    border: none;
-    color: inherit; /* pour utiliser la couleur du texte par défaut */
-    cursor: text;
-    font: inherit; /* pour utiliser la police du texte par défaut */
+#menu_nav ul {
+    list-style: none;
+    margin: 15;
     padding: 0;
-    
-}
+    display: flex;
+  }
+
+  #menu_nav li {
+    margin-right: 30px;
+  }
+
+  #menu_nav button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  #menu_nav a {
+    text-decoration: none;
+    margin-right: 20px;
+  }
 .pEntete2{
     background-color: rgba(255, 0, 0,0.2);
     border-radius: 10px;
@@ -269,7 +272,7 @@ input[type=range]{
     text-align: center;
     color: whitesmoke;
 }
-#pForm3{
+#pForm3,#pForm31{
     position: relative;
     top: -15%;
     color: whitesmoke;
@@ -277,8 +280,6 @@ input[type=range]{
     font-size: 18px;
     text-align: start;
 }
-
-
 #form3 table{
     width: 3cm; /* Ajustez la largeur selon vos besoins */
     margin: 10px; /* Ajoute un peu d'espace entre chaque tableau */
@@ -307,7 +308,7 @@ input[type=range]{
     margin-top: -8%;
 }
 #tableauEquipes{
-display: flex;
+    display: flex;
     flex-wrap: wrap; /* Permet aux éléments de sauter de ligne */
     justify-content: center;
 }
@@ -345,11 +346,20 @@ display: flex;
     border-color: rgb(145, 144, 144);
     color: whitesmoke;
     height: auto;
-    
+}
+#profilDiv table {
+    width: 8cm; /* Ajustez la largeur selon vos besoins */
+    margin: 10px; /* Ajoute un peu d'espace entre chaque tableau */
+    background-color: rgba(255, 0, 0, 0.2);
+    border-radius: 10px;
+    border-style: dotted;
+    border-color: rgb(145, 144, 144);
+    color: whitesmoke;
+    height: auto;
 }
 
 tr{
-    /*display: grid;*/
+     /*display: grid;*/
     border-top: 1px solid whitesmoke;
 	
 }
@@ -399,7 +409,7 @@ th{
       transform: translateX(0%);
     }
 }
-#Boutton-Afficher {
+#Boutton-Afficher, #ButtonAuto {
     position: fixed;
     bottom: 15px;
     margin-left: 120%;

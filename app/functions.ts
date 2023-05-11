@@ -1,5 +1,8 @@
 import {btnValider , numberInput1 , numberInput2 ,infoBtn, TestButton, submitBtn, nomInput, prenomInput, levelRange} from './elements' ;
+import { Joueur } from './joueur';
 import { Equipe } from './equipe';
+import { Match } from './Match';
+
 const sports: string[] = ["Rugby", "Football", "Volleyball", "Handball", "Basketball","Badminton", "Tennis", "Water-Polo", "Fifa"];
 
 let sportCourantIndex: number = 0;
@@ -122,7 +125,7 @@ export function enableButton(button: HTMLButtonElement) {
 //focntion pour le form 2
 //passer du form1 a form2, et meme le form3 sera traiter ici
 
-export function transitionForms(formDisparaitre : HTMLFormElement, formApparaitre : HTMLFormElement) {
+export function transitionForms(formDisparaitre : HTMLElement, formApparaitre : HTMLElement) {
   formDisparaitre.style.display = "none";
 
   if (formDisparaitre.style.display=="none") {
@@ -141,52 +144,83 @@ export function transitionForms(formDisparaitre : HTMLFormElement, formApparaitr
 
 //parti 4 
 
-export function generationChampionnat(numTeams: number): string[][] {
-  const teams: string[] = []; // tableau pour stocker les noms d'équipe
+export function generationChampionnat(Equipes: Array<Equipe>): Match[][] {
   
-const matches: string[][] = []; // tableau pour stocker les matchs
+const matches: Match[] []= []; // tableau pour stocker les matchs
+let x : number=0;
 
-  // Remplir le tableau des noms d'équipe avec des noms génériques
-  for (let i = 1; i <= numTeams; i++) {
-    teams.push(`Equipe ${i}`);     //changer avec noms equipe  
-  }
 
   // Si le nombre d'équipes est impair, ajouter une équipe fictive pour que chaque équipe ait un adversaire à chaque tour
-  if (numTeams % 2 !== 0) {
-    teams.push("Bye");
-    numTeams++;
+  if (Equipes.length % 2 !== 0) {
+    Equipes.push(new Equipe(999,[]));//999=Bye
+    Equipes.length++;
   }
 
   // Générer les matchs pour chaque tour
-  for (let i = 0; i < numTeams - 1; i++) {
-    const journee: string[] = []; // tableau pour stocker les matchs du tour
+  for (let i = 0; i < Equipes.length - 1; i++) {
+    let journee: Match[]=[]; 
 
-    for (let j = 0; j < numTeams / 2; j++) {
-      // Si l'équipe j est l'équipe "Bye", alors elle joue contre la première équipe qui n'a pas encore joué contre elle
-      if (teams[j] === "Bye" || teams[numTeams-j-1]==="Bye") {
+    for (let j = 0; j < Equipes.length / 2; j++) {
+      if (Equipes[j].getIdentifiant() === 999 || Equipes[Equipes.length-j-1].getIdentifiant()===999) {
         console.log("Bye");
       }
-      // Sinon, générer un match normal entre les équipes j et (numTeams - j - 1) pour assurer que chaque équipe rencontre toutes les autres une fois
-      if(teams[j]!== "Bye" && teams[numTeams-j-1]!=="Bye" && teams[j]!==teams[numTeams-j-1]) {
-        journee.push(`${teams[j]} vs. ${teams[numTeams - j - 1]}`);
+     
+      if(Equipes[j].getIdentifiant() != 999 && Equipes[Equipes.length-j-1].getIdentifiant()!==999 && Equipes[j]!==Equipes[Equipes.length-j-1]) {
+        let match=new Match(x,Equipes[j],Equipes[Equipes.length - j - 1]);
+        journee.push(match);
+        x++;
       }
 	  
-      if(teams[j]!== "Bye" && teams[numTeams-j-1]!=="Bye" && teams[j]!==teams[numTeams-j-1])
-      console.log(teams[j]+ " ne peut pas s'affronter elle-meme");
-     }
-  
-      // Déplacer la dernière équipe du tableau vers la deuxième position pour faire tourner les équipes
-      teams.splice(1, 0, teams.pop() as string);
-  
-      // Ajouter les matchs du tour au tableau des matchs
-      matches.push(journee);
+	  if(Equipes[j].getIdentifiant() != 999 && Equipes[Equipes.length-j-1].getIdentifiant()!==999 && Equipes[j]!==Equipes[Equipes.length-j-1])
+		  console.log(Equipes[j]+ " ne peut pas s'affronter elle-meme");
     }
-  
-    // Retourner le tableau des matchs
-    return matches;
-  }  
 
-  //partie profil
+
+  const equipe: Equipe | undefined = Equipes.pop();
+  if (equipe instanceof Equipe) {
+    Equipes.splice(1, 0, equipe);
+  }
+
+
+    matches.push(journee);
+  }
+
+  // Retourner le tableau des matchs
+  return matches;
+}
+
+//fonction repartion automatique des joueurs
+
+
+
+export function creerEquipes(joueurs: Joueur[], nombreEquipes: number): Equipe[] {
+
+ const equipes: Equipe[] = [];
+ 
+  const sortedPlayers = joueurs.sort((a, b) => b.niveau - a.niveau);
+
+  
+  
+  for (let i = 0; i < nombreEquipes; i++) {
+    equipes.push(new Equipe(i+1,[]));
+   
+  }
+
+ 
+  for (let i = 0; i < sortedPlayers.length; i++) {
+    const player = sortedPlayers[i];
+    const weakestTeam = equipes.reduce((a, b) => a.getNiveau()< b.getNiveau() ? a : b);
+    weakestTeam.getJoueurs().push(player);
+  
+    
+ }
+
+
+
+  return equipes;
+}
+
+//partie profil
   //fonction pour mettre tous les div en cours a none
   export function turnNone(){
     const divsVisibles: HTMLDivElement[] = Array.from(document.querySelectorAll('div')).filter((div: HTMLDivElement) => {
@@ -200,20 +234,20 @@ const matches: string[][] = []; // tableau pour stocker les matchs
   }
 
   //fonction pour cree les tableaux 
-  export function generationTableauAffichage(equipe: Equipe, tableau: HTMLTableElement, entete: HTMLTableRowElement): void {
+  export function generationTableauAffichage(equipe: Equipe, tableau: HTMLElement): void {
     const table = document.createElement('table');
-    const entete1 = document.createElement('tr');
-    entete1.classList.add('pEntete2');
-    const nomEquipe = document.createElement('th');
-    nomEquipe.textContent = 'Equipe '+equipe.getIdentifiant();
-    entete1.appendChild(nomEquipe);
-    const nivEquipe = document.createElement('th');
-    nivEquipe.textContent = 'Niveau '+equipe.getScore();
-    entete1.appendChild(nivEquipe);
-    table.appendChild(entete1);
+    const thead = document.createElement('thead');
+    const entete = document.createElement('tr');
+    const nomEquipe1 = document.createElement('th');
+    nomEquipe1.setAttribute('colspan', '3');
+    nomEquipe1.innerHTML = 'Equipe ' + equipe.getIdentifiant() + '<br/>Niveau: ' + equipe.getNiveau();
+    entete.appendChild(nomEquipe1)
+    thead.appendChild(entete);
+    table.appendChild(thead);
     
+    const tbody = document.createElement('tbody');
     // Ajout des données des joueurs
-    for (const joueur of equipe.getJoueurs()) {
+    for (const joueur of (equipe.triListJoueur())) {
       const ligne = document.createElement('tr');
       const nomJoueur = document.createElement('td');
       nomJoueur.textContent = joueur.nom;
@@ -224,9 +258,10 @@ const matches: string[][] = []; // tableau pour stocker les matchs
       const nivJoueur = document.createElement('td');
       nivJoueur.textContent = joueur.niveau.toString();
       ligne.appendChild(nivJoueur);
-      table.appendChild(ligne);
+      tbody.appendChild(ligne);
     }
-    entete.appendChild(table);
-    tableau.appendChild(entete);
+    table.appendChild(tbody);
+    tableau.appendChild(table);
     
   }
+

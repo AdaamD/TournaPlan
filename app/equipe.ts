@@ -4,6 +4,7 @@ export class Equipe {
     private identifiant :number;//identifiant
      listejou:Array<Joueur>;//liste des joueurs de l'esuipe
      private score:number;//Scorre de l'equipe initalise a 0
+     
   
     constructor (id:number,maliste:Array<Joueur>)
     {
@@ -11,6 +12,7 @@ export class Equipe {
         this.score=0;
         this.listejou=maliste;
     }
+
     public triListJoueur(){
       return this.listejou.sort();
     }
@@ -47,14 +49,14 @@ export class Equipe {
       //Fonctions qui renvoie le niveau du groupe
       public getNiveau():number
       {
-        let x:number;
+        let scoreTotal:number;
         let i:number;
-        x=0;
+        scoreTotal=0;
         for(i=0;i<this.listejou.length;i++)
         {
-          x+=this.listejou[i].getniveau();
+          scoreTotal+=this.listejou[i].getniveau();
         }
-        return x;
+        return scoreTotal;
       }
     }
   

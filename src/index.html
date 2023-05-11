@@ -13,13 +13,14 @@
     <header> 
         <a href="index.html"><img src="../img/Logo-TournaPlanR-removebg-preview.png" alt="icone_tournoi" width="160" height=""></a> 
         <nav id="menu_nav">
-            <ul>
-              
-              <li id="profilLi" ><a href="../src/index.html"><button id="profilBtn" >PROFIL</button></a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">À propos</a></li>
-            </ul>
-        </nav>                
+          <ul>
+            <li>
+              <button id="profilBtn"><a id="profilLi">PROFIL</a></button>
+              <a href="index.html">Contact</a>
+              <a href="#">À propos</a>
+            </li>
+          </ul>
+        </nav>                   
     </header>
 
     <div id="accueil">
@@ -40,61 +41,71 @@
     </div>
 
     <div id="divForms">
-      <form action="" method="post" id="form1">
-        <fieldset>
-          <div id="partie1form1">
-              <label>Nombre totale de joueurs :  </label>
-              <input type="text" id="nbTotale" disabled>
-              <input type="button" id="ButtonIncre1" value="+">
-              <input type="button" id="ButtonDecre1" value="-" disabled>
-          </div>
-          <br>
+        <form action="" method="post" id="form1">
+          <fieldset>
+            <div id="partie1form1">
+                <label>Nombre totale de joueurs :  </label>
+                <input type="text" id="nbTotale" disabled>
+                <input type="button" id="ButtonIncre1" value="+">
+                <input type="button" id="ButtonDecre1" value="-" disabled>
+            </div>
+            <br>
 
-          <div id="partie2from1">
-              <label>Nombre d'equipes : </label>
-              <input type="text" id="nbEquipe" disabled >
-              <input type="button" id="ButtonIncre2" value="+" >
-              <input type="button" id="ButtonDecre2" value="-" disabled>
-          </div>
-          <br>
+            <div id="partie2from1">
+                <label>Nombre d'equipes : </label>
+                <input type="text" id="nbEquipe" disabled >
+                <input type="button" id="ButtonIncre2" value="+" >
+                <input type="button" id="ButtonDecre2" value="-" disabled>
+            </div>
+            <br>
 
-          <input type="button" id="validerbtn" value="Valider !" disabled="true">
-          <input type="button" id="remplirAuto" value="Remplir !" hidden>
-          <button type="button" class="btn-info"><i class="fas fa-info-circle"></i></button>
-        </fieldset>
-
-
-      </form>
+            <input type="button" id="validerbtn" value="Valider !" disabled="true">
+            <input type="button" id="remplirAuto" value="Remplir !" hidden>
+            <button type="button" class="btn-info"><i class="fas fa-info-circle"></i></button>
+          </fieldset>
 
 
-      <form action="" method="post" id="form2">
-        <fieldset>
-          <p><span id="nbActuel"></span></p> 
-          <input type="text" id="nom"  placeholder="Votre nom*" required><br>
-          <input type="text" id="prenom" placeholder="Votre prenom*" required><br>
-          <p id="pNiveau">Niveau :  <span id="selectedLevel"></span></p><br>
-          <p id="pScore">Score :  <span id="selectedScore"></span></p>
-          <input type="range" id="levelRange" min="0" max="150" value="0" step="10"><br>
-          <input type="button" id="subB" class="envoyerB" value="Enregistrer !">
-        </fieldset>
-      </form>
+        </form>
 
-      <form id="form3">
-          <p id="pForm3">Deplacer manuellement les joueurs dans les equipes</p>
-          <div id="listeJoueurs"></div>
-          <div id="tableauEquipes"></div>
-          <button id="Boutton-Afficher">Afficher le championnat</button>
-      </form>
+
+        <form action="" method="post" id="form2">
+          <fieldset>
+            <p><span id="nbActuel"></span></p> 
+            <input type="text" id="nom"  placeholder="Votre nom*" required><br>
+            <input type="text" id="prenom" placeholder="Votre prenom*" required><br>
+            <p id="pNiveau">Niveau :  <span id="selectedLevel"></span></p><br>
+            <p id="pScore">Score :  <span id="selectedScore"></span></p>
+            <input type="range" id="levelRange" min="0" max="150" value="0" step="10"><br>
+            <input type="button" id="subB" class="envoyerB" value="Enregistrer !">
+          </fieldset>
+        </form>
+
+        <div id="divChoixMode" hidden>
+          <button id="Boutton-Manuelle" >Boutton manuelle </button>
+          <button id="Boutton-Auto" >Boutton automatique</button>
+        </div>
+
+        <form id="form3">
+            <p id="pForm3">Deplacer manuellement les joueurs dans les equipes</p>
+            <p id="pForm31" hidden>Tableaux des equipes generer par le systeme: </p>
+            <div id="listeJoueurs"></div>
+            <div id="tableauEquipes"></div>
+            <button id="Boutton-Afficher">Afficher le championnat</button>
+        </form>
 		
-      <form id="form4">
-        <p id="pForm4">Liste des matchs:</p>
-        <div id="tableauJournee"></div>
-      </form>
-      <div id="profilDiv">
-        <p id="pForm4">Liste des equipes:</p>
-      </div>
-      
-      </div>
+		    <form id="form4">
+		    	<p id="pForm4">Liste des matchs:</p>
+          <div id="tableauJournee"></div>
+		    </form>
+
+        <div id="profilDiv">
+          <p id="pForm4">Liste des equipes:</p>
+        </div>
+  
+		
+		
+    </div>
+
 
       <footer>
         <p><button class="button-no-style">©</button>2023 TournaPlan.</p>
@@ -103,4 +114,3 @@
 
 </body>
 </html>
-  
