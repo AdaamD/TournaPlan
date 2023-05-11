@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 html {
     margin: 0;
     background-image: url('../img/bg-cover.jpg');
@@ -8,13 +10,16 @@ html {
     background-attachment: fixed;
 
 } 
+body {
+    font-family: 'Montserrat', sans-serif;
+  }
 header {
     z-index: -1; 
     position: relative;
     display: flex;
     align-items: center;
 }
-#menu_nav{
+#menu_nav {
     z-index: 0; /* changer la valeur de z-index à 1 */
     display: flex;
     transform: translateX(160%);
@@ -24,6 +29,38 @@ header {
     margin: 0;
     padding: 0;
     overflow: hidden; /* Ajouter cette propriété */
+   
+}
+/* =====================profil==================== */
+#tableau{
+    background-color: rgba(255, 0, 0,0.2);
+    border-radius: 10px;
+    border-style: dotted;
+    border-color: rgb(145, 144, 144);
+    width: 100%;
+}
+#menu_nav button{
+    background-color: transparent;
+    display: flex ;
+    justify-content: center;
+    border: none;
+    color: inherit; /* pour utiliser la couleur du texte par défaut */
+    cursor: text;
+    font: inherit; /* pour utiliser la police du texte par défaut */
+    padding: 0;
+    
+}
+.pEntete2{
+    background-color: rgba(255, 0, 0,0.2);
+    border-radius: 10px;
+    border-style: dotted;
+    border-color: rgb(145, 144, 144);
+    width: 100%;
+
+}
+/* ============================================== */
+.style_btn_dev_menu{
+    display: none ;
 }
 
 ul {
