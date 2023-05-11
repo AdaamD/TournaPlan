@@ -6,6 +6,10 @@ import { partieManuelle, partieAuto, form1, form2, form3 ,form4
 
 import {animationAccueil,checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat} from './functions';
 import { footer } from './elements';
+// ============Profil=================================
+import { profilBtn,profilLi,profilDiv } from './elements';
+import { generationTableauAffichage,turnNone } from './functions';
+// =====================================================
 import{Joueur} from './joueur';
 import{Equipe} from './equipe';
 
@@ -17,6 +21,11 @@ export let currentNumber2 = 0;
 
 numberInput1.value = currentNumber1.toString();
 numberInput2.value = currentNumber2.toString();
+//partie Profil=====================
+profilLi.style.display="none";
+profilDiv.style.display="none";
+let ListeEquipe:Array<Equipe>=Array<Equipe>();
+//=========================================
 
 /* Verificattion si Admin pour accèder à la partie Auto*/
 let IsAdmin = false;
@@ -32,6 +41,7 @@ bouttonAdmin.addEventListener("click", function() {
 commencerTournoi.addEventListener("click", function(event) {
   event.preventDefault();
   bouttonAdmin.disabled=true;
+  profilLi.style.display="none";
   accueilDiv.style.display="none";
   indexDiv.style.display="block";
   if(!IsAdmin){
@@ -354,7 +364,7 @@ submitBtn.addEventListener("click", (event) => {
         break;
       }
     }
-    let ListeEquipe:Array<Equipe>=Array<Equipe>();
+    
     if(divTableaux){
     for (let i = 0; i < nombreTeams; i++) {
       const tableauDiv = document.createElement("table");
@@ -507,6 +517,7 @@ window.addEventListener("load", () => {
   //parti 4
   ChampBtn.addEventListener("click", (e) => {
 	  e.preventDefault();
+    profilLi.style.display="block";
 	  transitionForms(form3,form4);
 	  const divChamp =document.getElementById("listeMatches");
      const matches = generationChampionnat(currentNumber2); // obtenir le tableau des matchs générés
@@ -635,4 +646,44 @@ window.addEventListener("load", () => {
 	}	
     
    });
+
+//partie profil
+
+
+profilBtn.addEventListener("click", function(event) {
+  event.preventDefault();
+  turnNone();
+  profilDiv.style.display="block";
+  //Creation du div de base pour le tableau
+  const pTabDiv = document.createElement('div');
+  // Création du tableau et de l'en-tête
+const tableau = document.createElement('table');
+tableau.id='Ptab';
+const entete = document.createElement('tr');
+const nomJoueur = document.createElement('th');
+nomJoueur.textContent = 'Nom';
+entete.appendChild(nomJoueur);
+const prenomJoueur = document.createElement('th');
+prenomJoueur.textContent = 'Prenom';
+entete.appendChild(prenomJoueur);
+const nivJoueur = document.createElement('th');
+nivJoueur.textContent = 'Niveau';
+entete.appendChild(nivJoueur);
+tableau.appendChild(entete);
+
+// Appel de la fonction avec la liste de joueurs, le tableau et l'en-tête créés à l'extérieur
+for (const equipe of ListeEquipe) {
+  console.log(equipe.getIdentifiant());
+  const x= document.createElement('tr');
+  generationTableauAffichage(equipe, tableau, x);
+  tableau.appendChild(x);
+
+}
+
+
+// Ajout du tableau au DOM
+pTabDiv.appendChild(tableau);
+document.body.appendChild(pTabDiv);
+  
+});
   

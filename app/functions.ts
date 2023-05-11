@@ -1,4 +1,6 @@
 import {btnValider , numberInput1 , numberInput2 ,infoBtn, TestButton, submitBtn, nomInput, prenomInput, levelRange} from './elements' ;
+import { Equipe } from './equipe';
+import { Joueur } from './joueur';
 
 const sports: string[] = ["Rugby", "Football", "Volleyball", "Handball", "Basketball","Badminton", "Tennis", "Water-Polo", "Fifa"];
 
@@ -185,3 +187,47 @@ const matches: string[][] = []; // tableau pour stocker les matchs
   // Retourner le tableau des matchs
   return matches;
 }
+  //partie profil
+  //fonction pour mettre tous les div en cours a none
+  export function turnNone(){
+    const divsVisibles: HTMLDivElement[] = Array.from(document.querySelectorAll('div')).filter((div: HTMLDivElement) => {
+      const styles = window.getComputedStyle(div);
+      return styles.display !== 'none' ;
+    });
+    for (const div of divsVisibles) {
+      div.style.display='none';
+      
+    }
+  }
+
+  //fonction pour cree les tableaux 
+  export function generationTableauAffichage(equipe: Equipe, tableau: HTMLTableElement, entete: HTMLTableRowElement): void {
+    const table = document.createElement('table');
+    const entete1 = document.createElement('tr');
+    entete1.classList.add('pEntete2');
+    const nomEquipe = document.createElement('th');
+    nomEquipe.textContent = 'Equipe '+equipe.getIdentifiant();
+    entete1.appendChild(nomEquipe);
+    const nivEquipe = document.createElement('th');
+    nivEquipe.textContent = 'Niveau '+equipe.getScore();
+    entete1.appendChild(nivEquipe);
+    table.appendChild(entete1);
+    
+    // Ajout des données des joueurs
+    for (const joueur of equipe.getJoueurs()) {
+      const ligne = document.createElement('tr');
+      const nomJoueur = document.createElement('td');
+      nomJoueur.textContent = joueur.nom;
+      ligne.appendChild(nomJoueur);
+      const prenomJoueur = document.createElement('td');
+      prenomJoueur.textContent = joueur.prenom;
+      ligne.appendChild(prenomJoueur);
+      const nivJoueur = document.createElement('td');
+      nivJoueur.textContent = joueur.niveau.toString();
+      ligne.appendChild(nivJoueur);
+      table.appendChild(ligne);
+    }
+    entete.appendChild(table);
+    tableau.appendChild(entete);
+    
+  }

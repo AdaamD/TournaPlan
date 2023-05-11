@@ -11,6 +11,9 @@ export class Equipe {
         this.score=0;
         this.listejou=maliste;
     }
+    public triListJoueur(){
+      return this.listejou.sort();
+    }
   
     public getIdentifiant():number
      {

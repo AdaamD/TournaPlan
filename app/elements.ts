@@ -50,6 +50,14 @@ export const afficherChampionnat = document.getElementById("Boutton-Afficher") a
 
 export const ChampBtn = document.getElementById("Boutton-Afficher") as HTMLButtonElement;
 
+//Partie profil -affichage de la fiche de match-
+export const profilBtn = document.getElementById("profilBtn") as HTMLButtonElement;
+export const profilLi = document.getElementById("profilLi") as HTMLButtonElement;
+export const profilDiv = document.getElementById("profilDiv") as HTMLButtonElement;
+
+
+  
+
 //footer
 export const footer = document.querySelector('footer');
 
