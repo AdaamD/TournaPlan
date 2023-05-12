@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
 html {
     margin: 0;
     background-image: url('../img/bg-cover.jpg');
@@ -10,25 +9,19 @@ html {
     background-attachment: fixed;
 
 } 
-body {
-    font-family: 'Montserrat', sans-serif;
-  }
 header {
-z-index: -1; 
     position: relative;
     display: flex;
     align-items: center;
+    color: whitesmoke;
 }
 #menu_nav{
-z-index: 0; /* changer la valeur de z-index à 1 */
-    display: flex;
-    transform: translateX(160%);
-    justify-content: center;
-    align-items: center;
- height: 30px; /* Ajuster la hauteur du bloc selon votre besoin */
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* Ajouter cette propriété */
+    color: whitesmoke;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    padding: 10px;
 }
 /* =====================profil==================== */
 #tableau{
@@ -38,17 +31,27 @@ z-index: 0; /* changer la valeur de z-index à 1 */
     border-color: rgb(145, 144, 144);
     width: 100%;
 }
-#menu_nav button{
-    background-color: transparent;
-    display: flex ;
-    justify-content: center;
-    border: none;
-    color: inherit; /* pour utiliser la couleur du texte par défaut */
-    cursor: text;
-    font: inherit; /* pour utiliser la police du texte par défaut */
+#menu_nav ul {
+    list-style: none;
+    margin-top  : 20;
     padding: 0;
-    
-}
+    display: flex;
+  }
+
+  #menu_nav li {
+    margin-right: 0px;
+  }
+
+  #menu_nav button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
+  #menu_nav a {
+    text-decoration: none;
+    margin-right: 35px;
+  }
 .pEntete2{
     background-color: rgba(255, 0, 0,0.2);
     border-radius: 10px;
@@ -73,7 +76,7 @@ li {
     margin: 0 22px;
 }
 
-a {
+#profilBtn,a{
   text-decoration: none;
   color: whitesmoke;
   font-size: 18px;
@@ -153,6 +156,7 @@ div{
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    width: 7cm;
 }
 #BouttonAuto{
     display: none;
@@ -164,14 +168,47 @@ div{
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    width: 7cm;
 }
-#form1,#form2,#form3 {
+#Boutton-Auto,#Boutton-Manuelle{
+    padding: 10px 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: red;
+    color: whitesmoke;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 7cm;
+    margin: 10px;
+}
+#form1{
     display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#form2 {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#form3 {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -222,7 +259,7 @@ label{
     margin-top: 20px;
 }
 #form2{
-    width: 10cm;
+    width: 12cm;
     text-align: center;
     color: whitesmoke;
 }
@@ -269,7 +306,7 @@ input[type=range]{
     text-align: center;
     color: whitesmoke;
 }
-#pForm3{
+#pForm3,#pForm31{
     position: relative;
     top: -15%;
     color: whitesmoke;
@@ -277,10 +314,8 @@ input[type=range]{
     font-size: 18px;
     text-align: start;
 }
-
-
 #form3 table{
-    width: 3cm; /* Ajustez la largeur selon vos besoins */
+    width: 4cm; /* Ajustez la largeur selon vos besoins */
     margin: 10px; /* Ajoute un peu d'espace entre chaque tableau */
     background-color: rgba(255, 0, 0, 0.2);
     border-radius: 10px;
@@ -307,12 +342,12 @@ input[type=range]{
     margin-top: -8%;
 }
 #tableauEquipes{
-display: flex;
+    display: flex;
     flex-wrap: wrap; /* Permet aux éléments de sauter de ligne */
     justify-content: center;
 }
 #form4 {
-    margin-top: 10%;
+    margin-top: 5%;
     margin-bottom: 10%;
     align-items: center;
 }
@@ -321,7 +356,10 @@ display: flex;
     flex-wrap: wrap; /* Permet aux éléments de sauter de ligne */
     justify-content: center;
 }
-
+#subnewjoueur{
+    margin-left: 40%;
+    margin-top: 40px;
+}
 #pForm4{
     display: flex;
     justify-content: center ;
@@ -345,11 +383,20 @@ display: flex;
     border-color: rgb(145, 144, 144);
     color: whitesmoke;
     height: auto;
-    
+}
+#profilDiv table {
+    width: 8cm; /* Ajustez la largeur selon vos besoins */
+    margin: 10px; /* Ajoute un peu d'espace entre chaque tableau */
+    background-color: rgba(255, 0, 0, 0.2);
+    border-radius: 10px;
+    border-style: dotted;
+    border-color: rgb(145, 144, 144);
+    color: whitesmoke;
+    height: auto;
 }
 
 tr{
-    /*display: grid;*/
+     /*display: grid;*/
     border-top: 1px solid whitesmoke;
 	
 }
@@ -399,15 +446,31 @@ th{
       transform: translateX(0%);
     }
 }
-#Boutton-Afficher {
+#Boutton-Afficher, #ButtonAuto{
     position: fixed;
-    bottom: 15px;
+    top: 0px;
     margin-left: 120%;
     width: 5cm;
+    height: 30px;
     color: whitesmoke;
-    background-color: rgba(255, 0, 0,0.3);
-    border-radius: 13%;
+    background-color: rgba(255, 0, 0,0.4);
+    border-radius: 8%;
     cursor: pointer;
+}
+#newJoueur {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+     align-items: center; 
+    width: 5cm;
+    height: 30px;
+    color: whitesmoke;
+    background-color: rgba(255, 0, 0,0.4);
+    border-radius: 45%;
+    cursor: pointer;
+    margin-left: 42%;
+}
+#profilBtn{
+    text-decoration: none;
 }
 #Boutton-Simuler {
 	position: fixed;
