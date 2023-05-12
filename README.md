@@ -59,7 +59,7 @@ Finalement pour installer TypeScript avec npm utilisez une des commandes suivant
     - Cliquer sur "Commencer mon tournoi" pour démarer le tournoi.
     - Ajoutez le nombre de joueurs et d'équipes souhaités et valider vos choix. Du moment que le nombre de joueurs est supérieur au nombre d'équipes, ils peuvent être impairs. 
     - Renseignez les noms, prénoms et niveaux de vos joueurs ( par défaut, le niveau est à 0 s'il n'est pas défini) et enregistrez votre saisie.
-    - Formez vos équipes (elles peuvent être déséquilibrées) et cliquez sur "Afficher le championnat".
+    - Il y a deux choix possible qui s'offrent à nous : former les équipes automatiquement, ou les former manuellement. Dans ce cas formez vos équipes (elles peuvent être déséquilibrées) et cliquez sur "Afficher le championnat".
     - Renseignez les scores de vos différent matchs et cliquez sur "Afficher le classement".
     - Le classement des équipes sera affiché.
  
