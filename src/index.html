@@ -15,9 +15,11 @@
         <nav id="menu_nav">
           <ul>
             <li>
-              <button id="profilBtn"><a id="profilLi">PROFIL</a></button>
-              <a href="index.html">Contact</a>
-              <a href="#">À propos</a>
+              <button id="profilBtn"><a id="profilLi">Profil</a></button>
+              <a href="index.html" id="contactLi">Contact</a>
+              <a href="#" id="aproposLi">À propos</a>
+              <button id="btnCalendrier"><a id="calendrierLi">Calendrier</a></button>
+              <button id="btnClassement"><a id="classementLi">Classement</a></button>
             </li>
           </ul>
         </nav>                   
@@ -63,10 +65,7 @@
             <input type="button" id="remplirAuto" value="Remplir !" hidden>
             <button type="button" class="btn-info"><i class="fas fa-info-circle"></i></button>
           </fieldset>
-
-
         </form>
-
 
         <form action="" method="post" id="form2">
           <fieldset>
@@ -97,17 +96,17 @@
         </form>
 		
 		    <form id="form4">
+          <div id="divChampionnat"> 
 		    	<p id="pForm4">Liste des matchs:</p>
-          <div id="tableauJournee"></div>
+          <div id="tableauJournee"></div></div>
+          <div id= "divClassement" ></div>
 		    </form>
-		
 		
     </div>
     <div id="profilDiv">
       <p id="pForm4">Liste des equipes:</p>
       <button id="newJoueur" hidden>+ Nouveau Joueur</button>
     </div>
-
 
       <footer>
         <p><button class="button-no-style">©</button>2023 TournaPlan.</p>

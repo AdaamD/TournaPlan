@@ -1,19 +1,12 @@
 import { partieManuelle, partieAuto, form1, form2, form3 ,form4
 ,btnValider , numberInput1 , numberInput2 ,infoBtn,addButton1, subButton1, subButton2, addButton2, submitBtn
 ,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, TestButton,accueilDiv, indexDiv, commencerTournoi
-,bouttonAdmin, ButtonManuelle,ButtonAuto,divAutoManuelle,pManuelle,pAuto,divGeneral,newJoueur,submitBtnNew,divchoixequipe,menuNavigation,pForm4
+,bouttonAdmin, ButtonManuelle,ButtonAuto,footer,divAutoManuelle,pManuelle,pAuto,profilBtn,profilLi,profilDiv,divGeneral,newJoueur,btnClassement,classementLi,divClassement,btnCalendrier,calendrierLi,aproposLi,contactLi,divChampionnat,submitBtnNew,divchoixequipe,divTableauxJ,menuNavigation,pForm4
 } from './elements';
 
-import {animationAccueil,checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat,creerEquipes} from './functions';
-import { footer } from './elements';
+import {animationAccueil,checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms ,generationTableauAffichage,turnNone, generationChampionnat,creerEquipes,trierParPoints} from './functions';
 import{Joueur} from './joueur';
 import{Equipe} from './equipe';
-
-  // ============Profil=================================
-  import { profilBtn,profilLi,profilDiv } from './elements';
-  import { generationTableauAffichage,turnNone } from './functions';
-  // =====================================================
-  
 
 let ListeEquipe:Array<Equipe>=Array<Equipe>();
 let JoueurNom;
@@ -29,11 +22,10 @@ export let currentNumber2 = 0;
 numberInput1.value = currentNumber1.toString();
 numberInput2.value = currentNumber2.toString();
 
-  //partie Profil=====================
-  profilLi.style.display="none";
-  profilDiv.style.display="none";
-  //=========================================
-
+profilLi.style.display="none";
+profilDiv.style.display="none";
+calendrierLi.style.display="none";
+classementLi.style.display="none";
 
 /* Verificattion si Admin pour accèder à la partie Auto*/
 let IsAdmin = false;
@@ -51,6 +43,8 @@ commencerTournoi.addEventListener("click", function(event) {
   menuNavigation.style.display="none";
   bouttonAdmin.disabled=true;
   profilLi.style.display="none";
+  calendrierLi.style.display="none";
+  classementLi.style.display="none";
   accueilDiv.style.display="none";
   indexDiv.style.display="block";
   if(!IsAdmin){
@@ -145,7 +139,7 @@ partieAuto.addEventListener("click", function() {
         TestButton.style.display ="none";
   
         for (let i = 0; i < Number(numberInput1.value); i++) {
-          nomInput.value=noms[i];///////////////////////////////////////
+          nomInput.value=noms[i];
           prenomInput.value=prenoms[i];
           let c=(Math.floor(Math.random() * 16) * 10);
           levelRange.value=(Object) (Math.floor(Math.random() * 16) * 10);  
@@ -197,7 +191,6 @@ subButton2.addEventListener("click", () => {
   checkInputs();
 });
 
-
 numberInput1.addEventListener("input", () => {
   checkInputs();
 });
@@ -206,18 +199,12 @@ numberInput2.addEventListener("input", () => {
   checkInputs();
 });
 
-// Bouton pour basculer entre les form
-
-
-
 btnValider.addEventListener("animationend", () => {
   btnValider.classList.remove("enable");
 });
 
 //PARTI FORM2
 let i:number=0;
-
-
 
 btnValider.addEventListener("click", () => {
 transitionForms(form1,form2);
@@ -229,7 +216,6 @@ interface DataForm1 {
   NombreDeJoueurs: number;
   NombreDTeams: number;
 }
-
 // Récupérer les champs input
 const nomInput = document.getElementById("nom") as HTMLInputElement;
 const prenomInput = document.getElementById("prenom") as HTMLInputElement;
@@ -242,14 +228,12 @@ if(DataF1){
   const formData: DataForm1[] = JSON.parse(DataF1);
   nombreDeJoueurs = formData[0].NombreDeJoueurs;
 }
-
 // Récupérer le bouton input button
 numberP.innerText=((i+1).toString().concat("/",nombreDeJoueurs.toString()));
 
 let iActuelNum= i+1;
 localStorage.setItem("IActuel", JSON.stringify(iActuelNum));
 
-  
 // recuperer le num du joueur actuel
 //dans cette partie le form3 sera traiter
 
@@ -277,13 +261,9 @@ submitBtn.addEventListener("click", (event) => {
   const nom = nomInput.value;
   const prenom = prenomInput.value;
 
-//-----------------------------------------------------------------------
   let j: Joueur;
   j=new Joueur(nom,prenom,Number(levelRange.value));
   ListeJoueurs.push(j);
-
-
-//-----------------------------------------------------------------------
 
   // utiliser l'objet enregistrer pour le mettre dans le localStorage
   let getdata = localStorage.getItem("DataDesJoeurs");
@@ -422,7 +402,6 @@ submitBtn.addEventListener("click", (event) => {
           if (trouve) {
             break;
           }
-          
         }
       
         let equipe:Equipe;
@@ -442,9 +421,6 @@ submitBtn.addEventListener("click", (event) => {
             }
         }
         
-        // const joueur = JSON.parse(data);
-        // const joueurButton = creerBoutonJoueur(joueur);
-
         const rangee = document.createElement("tr");
         const cellule = document.createElement("td");
 
@@ -473,10 +449,7 @@ function onButtonAutoClick() {
   transitionForms(divAutoManuelle, form3);
  
   ListeEquipe = creerEquipes(ListeJoueurs, nombreTeams);
-  
-    
-  console.log("length equipe :" + ListeEquipe.length);
-  
+
   // Supprimer l'écouteur d'événement après la première exécution
   ButtonAuto.removeEventListener("click", onButtonAutoClick);
 
@@ -503,11 +476,9 @@ function onButtonAutoClick() {
         const cellule = document.createElement("td");
         const nomJoueur = document.createTextNode(joueur[j].getNom());
         
-  
         cellule.appendChild(nomJoueur);
         rangee.appendChild(cellule);
         tableauDiv.appendChild(rangee);
-        
       }
       divTableaux.appendChild(tableauDiv);
       }
@@ -517,14 +488,7 @@ function onButtonAutoClick() {
 
   ButtonAuto.addEventListener("click", onButtonAutoClick);
 
-
-
-
-
-
 //3-partie input range pour niveau
-
-// partie 2 sélecteur niveau 
 
 selectedLevel.innerText= valeurParDefaut;
 selectedScore.innerText= "0"
@@ -550,15 +514,14 @@ levelRange.addEventListener("input", function() {
       break;
   }
 });
-
-
-
 });
 
-
-
 //PARTI FORM3
-
+window.addEventListener('beforeunload', (event) => {
+  // Affiche une boîte de dialogue de confirmation avant que la page ne soit actualisée
+  event.preventDefault();
+  event.returnValue = 'Attention, si vous actualisez la page, vous perdrez toutes vos données. Êtes-vous sûr de vouloir continuer ?';
+});
 
 window.addEventListener("load", () => {
  
@@ -573,24 +536,23 @@ window.addEventListener("load", () => {
 });
 
   //parti 4
+  let indexinput=0;
   ChampBtn.addEventListener("click", (e) => {
 	  e.preventDefault();
+
     menuNavigation.style.display="block";
     profilLi.style.display="block";
+    classementLi.style.display="block";
+    contactLi.style.display="none";
+    aproposLi.style.display="none";
 	  transitionForms(form3,form4);
 	  const divChamp =document.getElementById("listeMatches");
      const matches = generationChampionnat(ListeEquipe); // obtenir le tableau des matchs générés
      const nbJournees = matches.length; // obtenir le nombre de journées dans le championnat
     // boucle à travers chaque journée
-	
-	
-	console.log('nombre de journées'+nbJournees);
-	console.log('nombre d équipes'+currentNumber2);
 
-  const divTableaux =document.getElementById("tableauJournee");
   let tableauDivJournee;
   let input1, input2;
-	
 	
 	if (currentNumber2%2==0){
 	for (let head=0 ;head<currentNumber2-1;head++){
@@ -603,8 +565,8 @@ window.addEventListener("load", () => {
 
     tableauDivJournee.appendChild(nomColonne);
 
-    if(divTableaux){
-      divTableaux.appendChild(tableauDivJournee);
+    if(divTableauxJ){
+      divTableauxJ.appendChild(tableauDivJournee);
     }
 
     const journee = matches[head]; // obtenir le tableau des matchs pour la journée i
@@ -620,13 +582,19 @@ window.addEventListener("load", () => {
      input1=document.createElement("input");
      input1.type="number";
      input1.min="0";
-     input1.id="input1Score";
+     indexinput++;
+     input1.id="input"+(indexinput);
 
      input2=document.createElement("input");
      input2.type="number";
      input2.min="0";
-     input2.id="input2Score";
+     indexinput++;
+     input2.id="input"+(indexinput);
 
+     if(IsAdmin){
+      input1.value=Math.floor(Math.random() * (5+ 1));
+      input2.value=Math.floor(Math.random() * (5+ 1));
+  }
      const divMatch = document.createElement("div");
      divMatch.id=`divMatch${j+1}`;
 
@@ -639,14 +607,12 @@ window.addEventListener("load", () => {
      cellule.appendChild(divMatch);
      rangee.appendChild(cellule);
 
-
      if(tableauDivJournee){
        tableauDivJournee.appendChild(rangee);
      }   
    }
 	}
 	}
-  
 	else {
 		for (let head=0 ;head<currentNumber2;head++){
       tableauDivJournee = document.createElement("table");
@@ -657,11 +623,9 @@ window.addEventListener("load", () => {
       nomColonne.textContent = `Journée ${idColonne}`;
 
       tableauDivJournee.appendChild(nomColonne);
-      if(divTableaux){
-        divTableaux.appendChild(tableauDivJournee);
+      if(divTableauxJ){
+        divTableauxJ.appendChild(tableauDivJournee);
       }
-
-
         const journee = matches[head]; // obtenir le tableau des matchs pour la journée i
         const nbMatches = journee.length; // obtenir le nombre de matchs dans la journée i
         localStorage.setItem(`Journée ${head+1}`, JSON.stringify(journee)); 
@@ -675,12 +639,19 @@ window.addEventListener("load", () => {
          input1=document.createElement("input");
          input1.type="number";
          input1.min="0";
-         input1.id="input1Score";
+         indexinput++;
+         input1.id="input"+(indexinput);
     
          input2=document.createElement("input");
          input2.type="number";
          input2.min="0";
-         input2.id="input2Score";
+         indexinput++;
+         input2.id="input"+(indexinput);
+
+         if(IsAdmin){
+          input1.value=Math.floor(Math.random() * (10+ 1));
+          input2.value=Math.floor(Math.random() * (10+ 1));
+        }
     
          const divMatch = document.createElement("div");
          divMatch.id=`divMatch${j+1}`;
@@ -694,42 +665,35 @@ window.addEventListener("load", () => {
          cellule.appendChild(divMatch);
          rangee.appendChild(cellule);
     
-    
          if(tableauDivJournee){
            tableauDivJournee.appendChild(rangee);
          }
       }
-    
-       
        }
 	}	
     
    });
 
-   //partie profil
-
+//partie profil
 profilBtn.addEventListener("click", () =>{
   form4.style.display="none";
   turnNone();
   profilDiv.style.display="block";
   newJoueur.style.display="flex";
-  //Creation du div de base pour le tableau
+  profilLi.style.display="none";
   const pTabDiv = document.createElement('div');
   pTabDiv.style.display="flex";
   pTabDiv.style.flexWrap="wrap";
   pTabDiv.style.justifyContent="center";
+  classementLi.style.display="block";
+  calendrierLi.style.display="block";
 
-
-  
-
-
-// Appel de la fonction avec la liste de joueurs, le tableau et l'en-tête créés à l'extérieur
-for (const equipe of ListeEquipe) {
-  console.log(equipe.getIdentifiant());
-  if(equipe.getIdentifiant()!=999)
-  {
-  generationTableauAffichage(equipe, pTabDiv);
-}}
+  // Appel de la fonction avec la liste de joueurs, le tableau et l'en-tête créés à l'extérieur
+  for (const equipe of ListeEquipe) {
+    if(equipe.getIdentifiant()!=999)
+    {
+    generationTableauAffichage(equipe, pTabDiv);
+    }}
 
 
 // Ajout du tableau au DOM
@@ -751,23 +715,18 @@ newJoueur.addEventListener("click", () =>{
   numberP.textContent = "Nouveau Joueur";
   divchoixequipe.style.display="block";
 
-  // Obtenez l'élément parent dans lequel vous souhaitez ajouter les cases à cocher
-
-
-// Tableau contenant les libellés des cases à cocher
-nomInput.focus();
-nomInput.value="";
-prenomInput.value="";
-levelRange.value="0";
-selectedScore.innerText= "0";
-divchoixequipe.innerHTML = "";
-const labels = ListeEquipe;
+  nomInput.focus();
+  nomInput.value="";
+  prenomInput.value="";
+  levelRange.value="0";
+  selectedScore.innerText= "0";
+  divchoixequipe.innerHTML = "";
+  const labels = ListeEquipe;
 
 
 
 const group = "myCheckboxGroup";
 
-// Événement de gestion de la sélection mutuellement exclusive
 function handleCheckboxSelection(event: Event) {
   const selectedCheckbox = event.target as HTMLInputElement;
 
@@ -779,7 +738,6 @@ function handleCheckboxSelection(event: Event) {
     }
   });
 }
-
 
 // Boucle pour créer et ajouter chaque case à cocher
 
@@ -809,9 +767,7 @@ for (let i = 0; i < labels.length; i++) {
 }}
 });
 
-
 submitBtnNew.addEventListener("click", () =>{
-
 
   //Ajout joueur 
 
@@ -821,10 +777,6 @@ submitBtnNew.addEventListener("click", () =>{
     // Récupération des valeurs des champs input
     const nom = nomInput.value;
     const prenom = prenomInput.value;
-  
-    
-   
-    //Recuperer l'equipe selectionne
 
     // Obtenez toutes les cases à cocher du groupe
 const checkboxes = document.getElementsByName("myCheckboxGroup") as NodeListOf<HTMLInputElement>;
@@ -838,17 +790,13 @@ for (let i = 0; i < checkboxes.length; i++) {
   
   if (checkbox.checked) {
     // La case à cocher est sélectionnée, récupérer son contenu
-    console.log(checkbox.id);
     equipeselect =parseInt(checkbox.id, 10) ;
-    console.log(equipeselect);
     break;
   }
 }
     
-    
 for(let i=0;i<ListeEquipe.length;i++)
 {
-  console.log("id "+ListeEquipe[i].getIdentifiant());
   if(ListeEquipe[i].getIdentifiant()==equipeselect){
     let j:Joueur;
     j=new Joueur(nom,prenom,Number(levelRange.value));
@@ -857,8 +805,7 @@ for(let i=0;i<ListeEquipe.length;i++)
   }
       
 }
-console.log("equipeg"+ListeEquipe[i].getIdentifiant());
-//Ajout du joueur
+
 
 //Affichage du profil
 form2.style.display="none";
@@ -868,3 +815,154 @@ profilBtn.click();
 else{
   window.alert("Veuillez remplir les champs avant d'enregistrer !!!");
 }});
+
+btnCalendrier.addEventListener("click",(e)=>{
+
+  classementLi.style.display="block";
+	calendrierLi.style.display="none";
+	profilLi.style.display="block";
+  form4.style.display="flex";
+  divTableauxJ.style.display="flex";
+  const tdElements = divTableauxJ.querySelectorAll("td");
+  let t:number=0;
+
+  tdElements.forEach(td => {
+    const divElements = td.querySelectorAll("div");
+    
+    divElements.forEach(div => {
+      div.style.display = "block";
+    });
+  });
+
+	
+  if(divClassement.style.display=="block"){
+	  transitionForms(divClassement,divChampionnat);
+  }else if(profilDiv.style.display=="block"){
+	  transitionForms(profilDiv,divChampionnat);
+  }
+});
+
+btnClassement.addEventListener("click", (e) => {
+	   
+  e.preventDefault();
+  transitionForms(divChampionnat,divClassement);
+  form4.style.display="flex";
+  divClassement.style.display="block";
+  classementLi.style.display="none";
+  calendrierLi.style.display="block";
+  profilLi.style.display="block";
+  profilDiv.style.display="none";
+  let cpt:number=1;
+  const matches = generationChampionnat(ListeEquipe);
+  divClassement.innerHTML="";
+  
+  
+  //matches.length envoie le nombre de journées
+ //ici on récupère alors le nombre de matchs dans une journée
+ //NB: chaque journée a le meme nombre de matchs
+ for (let i=0;i<matches.length;i++){
+  for (let j=0;j<matches[0].length;j++){
+    
+    let scoree1=document.getElementById("input"+cpt).value;
+    let scoree2=document.getElementById("input"+(cpt+1)).value;
+    if (scoree1!='' && scoree2!=''){ 
+
+    if (scoree1>scoree2){
+      matches[i][j].getTeam1().win();
+      matches[i][j].getTeam2().lose();
+    }
+
+    if (scoree1<scoree2){
+      matches[i][j].getTeam1().lose();
+      matches[i][j].getTeam2().win();			   
+    }
+
+    if (scoree1==scoree2){
+      matches[i][j].getTeam1().draw();
+      matches[i][j].getTeam2().draw();
+    }}
+    cpt+=2;
+  }
+ }
+ 
+  let ListeEquipeTrier= ListeEquipe;
+  trierParPoints(ListeEquipeTrier);
+ 
+  let classement;
+  const divCl=document.createElement("div");
+  divCl.id='idClassement'
+  classement=document.createElement("table");
+  classement.id='tabClassement';
+  classement.classList.add("tableau");
+
+  const thead=document.createElement("thead");
+  const trhead=document.createElement("tr");
+  
+  const th1=document.createElement("th");
+  const th2=document.createElement("th");
+  const th3=document.createElement("th");
+  
+  th1.setAttribute('colspan','1');
+  th2.setAttribute('colspan','1');
+  th3.setAttribute('colspan','1');
+  
+  th1.appendChild(document.createTextNode('Equipes'));
+  th2.appendChild(document.createTextNode('Matchs joués'));
+  th3.appendChild(document.createTextNode('Points'));
+  
+  trhead.appendChild(th1);
+  trhead.appendChild(th2);
+  trhead.appendChild(th3);
+
+  thead.appendChild(trhead);
+
+  classement.appendChild(thead);
+
+  const tablebody=document.createElement("tbody");
+  
+  if(ListeEquipeTrier[ListeEquipeTrier.length-1].getIdentifiant()!=999){
+  for (let i=0; i<ListeEquipeTrier.length;i++){
+   const rangee=document.createElement("tr");
+   const cellule1=document.createElement("td");
+   const cellule2=document.createElement("td");
+   const cellule3=document.createElement("td");
+
+   const scoreEquipe=ListeEquipeTrier[i].getScore();
+   const matchEquipe=ListeEquipeTrier[i].getNbMatchs();
+
+   cellule1.appendChild(document.createTextNode("Equipe "+ListeEquipeTrier[i].getIdentifiant()));
+   cellule2.appendChild(document.createTextNode(matchEquipe.toString()));
+   cellule3.appendChild(document.createTextNode(scoreEquipe.toString()));
+   rangee.appendChild(cellule1);
+   rangee.appendChild(cellule2);
+   rangee.appendChild(cellule3);
+   tablebody.appendChild(rangee);	
+  }
+  }
+  else{
+    for (let i=0; i<ListeEquipeTrier.length-1;i++){
+        const rangee=document.createElement("tr");
+        const cellule1=document.createElement("td");
+        const cellule2=document.createElement("td");
+        const cellule3=document.createElement("td");
+
+        const scoreEquipe=ListeEquipeTrier[i].getScore();
+        const matchEquipe=ListeEquipeTrier[i].getNbMatchs();
+
+        cellule1.appendChild(document.createTextNode("Equipe "+ListeEquipeTrier[i].getIdentifiant()));
+        cellule2.appendChild(document.createTextNode(matchEquipe.toString()));
+        cellule3.appendChild(document.createTextNode(scoreEquipe.toString()));
+        rangee.appendChild(cellule1);
+        rangee.appendChild(cellule2);
+        rangee.appendChild(cellule3);
+        tablebody.appendChild(rangee);
+    }
+  }
+
+  classement.appendChild(tablebody);
+  divCl.appendChild(classement);
+  divClassement.appendChild(divCl);
+  for (let i=0;i<ListeEquipe.length;i++){
+        ListeEquipe[i].setZero();
+        } 
+});

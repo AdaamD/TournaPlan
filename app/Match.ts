@@ -26,5 +26,14 @@ export class Match {
      {
         return this.Equipe2.getIdentifiant()+"";;
      }
+     public getTeam1():Equipe
+     {
+        return this.Equipe1;
+     }
+	 
+	 public getTeam2():Equipe
+     {
+        return this.Equipe2;
+     }
     }
   

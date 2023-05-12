@@ -257,3 +257,8 @@ export function creerEquipes(joueurs: Joueur[], nombreEquipes: number): Equipe[]
     
   }
 
+  export function trierParPoints(equipes: Equipe[]) {
+    equipes.sort(function(a, b) {
+      return b.getScore() - a.getScore();
+    });
+  }

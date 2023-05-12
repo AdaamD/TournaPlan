@@ -53,25 +53,33 @@ export const valeurParDefaut="Débutant";
 
 export const numberP = document.getElementById("nbActuel") as HTMLSpanElement ;
 
-
 //partie 4 pour générer le championnat 
 export const afficherChampionnat = document.getElementById("Boutton-Afficher") as HTMLButtonElement;
 export const pForm4 = document.getElementById("pForm4") as HTMLParagraphElement;
 export const pTabDiv = document.getElementById("divEquipesInfo") as HTMLDivElement;
 
-
 export const ChampBtn = document.getElementById("Boutton-Afficher") as HTMLButtonElement;
+//partie 4 bis avec les classements
+export const btnClassement= document.getElementById("btnClassement") as HTMLButtonElement;
+export const classementLi= document.getElementById("classementLi") as HTMLButtonElement;
+export const divClassement= document.getElementById("divClassement") as HTMLButtonElement;
+
+//affichage du calendrier
+export const btnCalendrier= document.getElementById("btnCalendrier") as HTMLButtonElement;
+export const calendrierLi= document.getElementById("calendrierLi") as HTMLButtonElement;
+export const divChampionnat= document.getElementById("divChampionnat") as HTMLButtonElement;
 
 //Partie profil -affichage de la fiche de match-
 export const profilBtn = document.getElementById("profilBtn") as HTMLButtonElement;
 export const profilLi = document.getElementById("profilLi") as HTMLButtonElement;
+export const contactLi = document.getElementById("contactLi") as HTMLLIElement;
+export const aproposLi = document.getElementById("aproposLi") as HTMLLIElement;
 export const profilDiv = document.getElementById("profilDiv") as HTMLButtonElement;
 export const newJoueur = document.getElementById("newJoueur") as HTMLButtonElement;
 
 export const divchoixequipe = document.getElementById("EquipenewJou") as HTMLDivElement;
 
-
-
+export const divTableauxJ =document.getElementById("tableauJournee") as HTMLDivElement;
 
 //footer
 export const footer = document.querySelector('footer');

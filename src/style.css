@@ -383,7 +383,23 @@ input[type=range]{
     border-color: rgb(145, 144, 144);
     color: whitesmoke;
     height: auto;
+    
 }
+#form4 #divClassement table{
+    width: 17cm; /* Ajustez la largeur selon vos besoins */
+    margin: 15px; /* Ajoute un peu d'espace entre chaque tableau */
+    background-color: rgba(255, 0, 0, 0.2);
+    border-radius: 10px;
+    border-style: dotted;
+    border-color: rgb(145, 144, 144);
+    color: whitesmoke;
+    height: auto;
+    line-height: 2.5;
+}
+#form4 #divClassement td{
+    border-bottom: 1px solid whitesmoke;;
+}
+
 #profilDiv table {
     width: 8cm; /* Ajustez la largeur selon vos besoins */
     margin: 10px; /* Ajoute un peu d'espace entre chaque tableau */
