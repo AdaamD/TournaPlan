@@ -90,7 +90,7 @@ Finalement pour installer TypeScript avec npm utilisez une des commandes suivant
             <span style="color:gray;">Fichier contenant des fonctions utilitaires</span>
     - *joueur.ts*
              <!-- Fichier contenant la logique de gestion des joueurs -->
-    - *joueur.ts*
+    - *Match.ts*
             <!-- Fichier contenant la logique de gestion des matchs -->
   - **dist**
             <!-- Dossier de distribution (contient les fichiers prêts pour la production) -->
