@@ -1,7 +1,7 @@
 import { partieManuelle, partieAuto, form1, form2, form3 ,form4
 ,btnValider , numberInput1 , numberInput2 ,infoBtn,addButton1, subButton1, subButton2, addButton2, submitBtn
 ,levelRange,selectedScore ,selectedLevel,valeurParDefaut,numberP ,nomInput,prenomInput, ChampBtn, TestButton,accueilDiv, indexDiv, commencerTournoi
-,bouttonAdmin, ButtonManuelle,ButtonAuto,divAutoManuelle,pManuelle,pAuto,divGeneral,newJoueur,submitBtnNew,divchoixequipe 
+,bouttonAdmin, ButtonManuelle,ButtonAuto,divAutoManuelle,pManuelle,pAuto,divGeneral,newJoueur,submitBtnNew,divchoixequipe,menuNavigation,pForm4
 } from './elements';
 
 import {animationAccueil,checkInputs, invalidInput, desequilibreInput, validInput, enableButton, transitionForms , generationChampionnat,creerEquipes} from './functions';
@@ -48,6 +48,7 @@ bouttonAdmin.addEventListener("click", function() {
 
 commencerTournoi.addEventListener("click", function(event) {
   event.preventDefault();
+  menuNavigation.style.display="none";
   bouttonAdmin.disabled=true;
   profilLi.style.display="none";
   accueilDiv.style.display="none";
@@ -574,6 +575,7 @@ window.addEventListener("load", () => {
   //parti 4
   ChampBtn.addEventListener("click", (e) => {
 	  e.preventDefault();
+    menuNavigation.style.display="block";
     profilLi.style.display="block";
 	  transitionForms(form3,form4);
 	  const divChamp =document.getElementById("listeMatches");
@@ -605,7 +607,6 @@ window.addEventListener("load", () => {
       divTableaux.appendChild(tableauDivJournee);
     }
 
-    console.log("match essai: "+matches[head][0]);
     const journee = matches[head]; // obtenir le tableau des matchs pour la journée i
     const nbMatches = journee.length; // obtenir le nombre de matchs dans la journée i
     localStorage.setItem(`Journée ${head+1}`, JSON.stringify(journee)); 
@@ -708,11 +709,15 @@ window.addEventListener("load", () => {
    //partie profil
 
 profilBtn.addEventListener("click", () =>{
+  form4.style.display="none";
   turnNone();
   profilDiv.style.display="block";
-  newJoueur.style.display="block";
+  newJoueur.style.display="flex";
   //Creation du div de base pour le tableau
   const pTabDiv = document.createElement('div');
+  pTabDiv.style.display="flex";
+  pTabDiv.style.flexWrap="wrap";
+  pTabDiv.style.justifyContent="center";
 
 
   
@@ -730,7 +735,7 @@ for (const equipe of ListeEquipe) {
 // Ajout du tableau au DOM
 profilDiv.appendChild(pTabDiv);
 divGeneral.style.display="block";
-pTabDiv.style.display="block";
+pTabDiv.style.display="flex";
 
 
 
@@ -740,6 +745,7 @@ pTabDiv.style.display="block";
 newJoueur.addEventListener("click", () =>{
   profilDiv.style.display="none";
   transitionForms(form4,form2);
+  form2.style.top="60%";
   submitBtn.style.display="none";
   submitBtnNew.style.display="block";
   numberP.textContent = "Nouveau Joueur";

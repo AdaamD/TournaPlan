@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap');
 html {
     margin: 0;
     background-image: url('../img/bg-cover.jpg');
@@ -33,13 +33,13 @@ header {
 }
 #menu_nav ul {
     list-style: none;
-    margin: 15;
+    margin-top  : 20;
     padding: 0;
     display: flex;
   }
 
   #menu_nav li {
-    margin-right: 30px;
+    margin-right: 0px;
   }
 
   #menu_nav button {
@@ -50,7 +50,7 @@ header {
 
   #menu_nav a {
     text-decoration: none;
-    margin-right: 20px;
+    margin-right: 35px;
   }
 .pEntete2{
     background-color: rgba(255, 0, 0,0.2);
@@ -76,7 +76,7 @@ li {
     margin: 0 22px;
 }
 
-a {
+#profilBtn,a{
   text-decoration: none;
   color: whitesmoke;
   font-size: 18px;
@@ -156,6 +156,7 @@ div{
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    width: 7cm;
 }
 #BouttonAuto{
     display: none;
@@ -167,14 +168,47 @@ div{
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    width: 7cm;
 }
-#form1,#form2,#form3 {
+#Boutton-Auto,#Boutton-Manuelle{
+    padding: 10px 10px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: red;
+    color: whitesmoke;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 7cm;
+    margin: 10px;
+}
+#form1{
     display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 40%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#form2 {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#form3 {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -225,7 +259,7 @@ label{
     margin-top: 20px;
 }
 #form2{
-    width: 10cm;
+    width: 12cm;
     text-align: center;
     color: whitesmoke;
 }
@@ -281,7 +315,7 @@ input[type=range]{
     text-align: start;
 }
 #form3 table{
-    width: 3cm; /* Ajustez la largeur selon vos besoins */
+    width: 4cm; /* Ajustez la largeur selon vos besoins */
     margin: 10px; /* Ajoute un peu d'espace entre chaque tableau */
     background-color: rgba(255, 0, 0, 0.2);
     border-radius: 10px;
@@ -313,7 +347,7 @@ input[type=range]{
     justify-content: center;
 }
 #form4 {
-    margin-top: 10%;
+    margin-top: 5%;
     margin-bottom: 10%;
     align-items: center;
 }
@@ -322,7 +356,10 @@ input[type=range]{
     flex-wrap: wrap; /* Permet aux éléments de sauter de ligne */
     justify-content: center;
 }
-
+#subnewjoueur{
+    margin-left: 40%;
+    margin-top: 40px;
+}
 #pForm4{
     display: flex;
     justify-content: center ;
@@ -409,15 +446,31 @@ th{
       transform: translateX(0%);
     }
 }
-#Boutton-Afficher, #ButtonAuto {
+#Boutton-Afficher, #ButtonAuto{
     position: fixed;
-    bottom: 15px;
+    top: 0px;
     margin-left: 120%;
     width: 5cm;
+    height: 30px;
     color: whitesmoke;
-    background-color: rgba(255, 0, 0,0.3);
-    border-radius: 13%;
+    background-color: rgba(255, 0, 0,0.4);
+    border-radius: 8%;
     cursor: pointer;
+}
+#newJoueur {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+     align-items: center; 
+    width: 5cm;
+    height: 30px;
+    color: whitesmoke;
+    background-color: rgba(255, 0, 0,0.4);
+    border-radius: 45%;
+    cursor: pointer;
+    margin-left: 42%;
+}
+#profilBtn{
+    text-decoration: none;
 }
 #Boutton-Simuler {
 	position: fixed;

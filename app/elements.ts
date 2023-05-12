@@ -2,6 +2,7 @@ export const accueilDiv = document.getElementById("accueil") as HTMLFormElement;
 export const sportElement = document.getElementById("texte-sport") as HTMLElement;
 export const nomSportElement = sportElement.querySelector(".nomSport") as HTMLElement;
 export const commencerTournoi= document.querySelector(".bouton-container") as HTMLButtonElement
+export const menuNavigation = document.getElementById("menu_nav") as HTMLElement;
 
 //export const barre_recherche= document.getElementById("BarreDeRecherche") as HTMLFormElement ;
 //export const rechercheBtn = document.getElementById("SubmitBarreRecherche");
@@ -55,6 +56,8 @@ export const numberP = document.getElementById("nbActuel") as HTMLSpanElement ;
 
 //partie 4 pour générer le championnat 
 export const afficherChampionnat = document.getElementById("Boutton-Afficher") as HTMLButtonElement;
+export const pForm4 = document.getElementById("pForm4") as HTMLParagraphElement;
+export const pTabDiv = document.getElementById("divEquipesInfo") as HTMLDivElement;
 
 
 export const ChampBtn = document.getElementById("Boutton-Afficher") as HTMLButtonElement;
